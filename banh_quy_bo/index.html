@@ -108,7 +108,7 @@
         }
 
         function parseDate(s) { const p=s.split('/'); return new Date(p[4],p[3]-1,p[2],p[0],p[1]).getTime(); }
-        const end = parseDate("18/20/10/03/2026");
+        const end = parseDate("19/20/10/03/2026");
         setInterval(() => {
             const diff = end - new Date().getTime();
             if(diff <= 0) { document.querySelector('.timer-box').innerText = "Ưu đãi đã kết thúc!"; return; }
