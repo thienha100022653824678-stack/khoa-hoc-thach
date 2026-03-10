@@ -2,26 +2,38 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bếp Bánh Sunny - Khóa học Tôm Chiên</title>
+    <title>Khóa học Tôm Chiên</title>
     <style>
+        * { box-sizing: border-box; }
         :root { --pink: #ff5c8a; --pink-light: #fff0f3; --text: #333; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 10px; margin: 0; }
         .card { background: white; width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .hero img { width: 100%; height: 260px; object-fit: cover; }
         .content { padding: 25px; }
-        .price-new { font-size: 34px; font-weight: 800; color: var(--text); }
-        .price-old { font-size: 18px; color: #bbb; text-decoration: line-through; margin-left: 10px; }
-        .timer-row { display: flex; align-items: center; gap: 8px; color: #ff2e63; margin: 15px 0; font-size: 18px; font-weight: bold; background: #fff9db; padding: 10px; border-radius: 10px; }
-        .btn-reg { background: linear-gradient(135deg, #ff85a2, #ff5c8a); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        .price-new { font-size: 32px; font-weight: 800; color: #333; }
+        .price-old { text-decoration: line-through; color: #bbb; margin-left: 10px; }
+        .timer-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin: 15px 0; font-size: 16px; text-align: center; }
+        .btn-reg { background: linear-gradient(135deg, #ff85a2, #ff5c8a); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 20px; display: block; text-align: center; text-decoration: none; width: 100%; }
         
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 10px; }
-        .modal-inner { background: white; width: 100%; max-width: 380px; border-radius: 25px; padding: 20px; text-align: center; position: relative; max-height: 98vh; overflow-y: auto; }
-        .bank-box { background: #f9f9f9; padding: 15px; border-radius: 12px; text-align: left; font-size: 14px; margin: 15px 0; border: 1px solid #eee; }
-        .btn-download { border: 2px solid var(--pink); color: var(--pink); padding: 8px 15px; border-radius: 10px; font-weight: bold; text-decoration: none; display: inline-block; margin-bottom: 15px; }
-        .notice { background: var(--pink-light); padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed var(--pink); font-weight: bold; font-size: 13px; margin: 15px 0; text-align: left; line-height: 1.5; }
-        .input-nick { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
-        .btn-submit { background: #333; color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; }
-        #success { display: none; margin-top: 20px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 15px; }
+        .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 25px; padding: 20px; text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
+        .bank-box { background: #f9f9f9; padding: 15px; border-radius: 15px; text-align: left; font-size: 15px; margin: 15px 0; border: 1px solid #eee; }
+        .bank-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .btn-copy { background: #fff; color: var(--pink); border: 1px solid #ddd; padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
+        .btn-dl { border: 2px solid var(--pink); color: var(--pink); padding: 10px 20px; border-radius: 10px; font-weight: bold; text-decoration: none; display: inline-block; margin-bottom: 15px; font-size: 15px; }
+        
+        .notice { background: var(--pink-light); padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed var(--pink); font-weight: 600; font-size: 15px; margin: 15px 0; text-align: left; line-height: 1.5; }
+        .input-nick { width: 100%; padding: 15px; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 12px; font-size: 16px; outline-color: var(--pink); }
+        
+        .file-upload-wrapper { position: relative; margin-bottom: 20px; }
+        .file-upload-label { display: block; background: #fff; border: 3px dashed #ff85a2; color: #ff5c8a; padding: 25px 15px; border-radius: 15px; font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.3s; line-height: 1.4; }
+        #f { opacity: 0; position: absolute; z-index: -1; }
+        .file-name-display { display: block; margin-top: 8px; font-size: 13px; color: #2ecc71; font-weight: bold; }
+
+        .btn-sub { background: #333; color: white; border: none; width: 100%; padding: 20px; border-radius: 12px; font-weight: bold; font-size: 20px; cursor: pointer; width: 100%; }
+        
+        /* PHẦN LƯU Ý CUỐI CÙNG */
+        .final-note { color: #d63031; font-size: 14px; font-weight: 600; margin-top: 15px; line-height: 1.5; text-align: left; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
@@ -29,69 +41,96 @@
         <div class="hero"><img src="https://cdn.tgdd.vn/2022/09/CookDish/2-cach-lam-tom-chien-xu-rao-dau-gion-rum-ai-cung-me-avt-1200x676.jpg"></div>
         <div class="content">
             <h1 style="margin:0;">Khóa học Tôm Chiên</h1>
-            <p style="color:#666; line-height:1.5;">Tự tay làm Tôm Chiên tại nhà!</p>
-            <div style="margin-bottom:15px;"><span class="price-new">199.000đ</span><span class="price-old">399.000đ</span></div>
-            <div class="timer-row">⏱ <span id="timer">60:00</span></div>
+            <p style="color:#666">Tự tay làm Tôm Chiên tại nhà!</p>
+            <div class="price-row"><span class="price-new">199.000đ</span><span class="price-old">399.000đ</span></div>
+            <div class="timer-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
             <button class="btn-reg" onclick="document.getElementById('m').style.display='flex'">Đăng ký ngay</button>
         </div>
     </div>
 
     <div id="m" class="modal">
         <div class="modal-inner">
-            <span style="position:absolute; top:10px; right:15px; font-size:30px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
-            <h3 style="margin:0;">Thanh toán học phí</h3>
-            <p>Số tiền: <strong style="color:#ff2e63; font-size:24px;">199.000đ</strong></p>
-            <img src="/Images/qr-thanh-toan.jpg" style="width:160px; border-radius:15px; border:1px solid #eee; margin-bottom:10px;">
-            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-download">📥 Tải mã QR về máy để quét ảnh</a>
+            <span style="position:absolute; top:10px; right:15px; font-size:35px; cursor:pointer; font-weight:bold;" onclick="document.getElementById('m').style.display='none'">&times;</span>
+            <h2 style="margin:0; font-size:22px;">Thanh toán học phí</h2>
+            <p style="color:#ff2e63; font-weight:900; font-size:26px; margin:10px 0;">199.000đ</p>
+            <img src="/Images/qr-thanh-toan.jpg" style="width:180px; border-radius:15px; margin-bottom:10px; border:1px solid #eee;">
+            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-dl">📥 Tải mã QR về máy</a>
+            
             <div class="bank-box">
-                <p>Ngân hàng: <b>MB Bank</b></p>
-                <p>STK: <b>8877848800613</b> <button onclick="navigator.clipboard.writeText('8877848800613');alert('Đã copy!')" style="font-size:10px;">Copy</button></p>
-                <p>Chủ TK: <b>LUU THI HOA</b></p>
-                <p style="color:#d63031;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
+                <p style="margin-top:0;">Ngân hàng: <b>MB Bank</b></p>
+                <div class="bank-row">
+                    <span>STK: <b style="font-size:18px;">8877848800613</b></span>
+                    <button class="btn-copy" onclick="copyText('8877848800613', 'Đã copy Số tài khoản!')">Copy</button>
+                </div>
+                <p>Chủ TK: <b style="font-size:16px;">LUU THI HOA</b></p>
+                <p style="color:#d63031; margin-bottom:0;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
             </div>
-            <div id="payForm">
+
+            <div id="f-box">
+                <div class="notice">
+                    Sau khi hoàn tất chuyển khoản thanh toán, BẠN hãy nhập tên Nick Telegram của BẠN vào ô bên dưới, sau đó nhấn "Chọn tệp" để tải lên ảnh bill chuyển khoản thành công và ấn Xác nhận & nhận link học để được Admin duyệt vào nhóm học.
+                </div>
+
                 <input type="text" id="nick" class="input-nick" placeholder="Nhập tên Nick Telegram của BẠN">
-                <div class="notice">Sau khi hoàn tất chuyển khoản, BẠN hãy nhập tên Nick Telegram vào ô trên, sau đó tải ảnh Bill và nhấn Xác nhận.</div>
-                <input type="file" id="f" accept="image/*" style="margin-bottom:15px;">
-                <button class="btn-submit" onclick="sendBill()">Xác nhận & nhận link học</button>
+
+                <div class="file-upload-wrapper">
+                    <label for="f" class="file-upload-label" id="fileLabel">
+                        📸 Nhấn vào đây để chọn tệp ảnh Bill chuyển khoản thành công gửi Admin
+                    </label>
+                    <input type="file" id="f" accept="image/*" onchange="updateFileName()">
+                    <span id="fileNameDisplay" class="file-name-display"></span>
+                </div>
+
+                <button class="btn-sub" onclick="sendBill()">Xác nhận & nhận link học</button>
             </div>
-            <div id="success">
-                <p style="font-weight:bold; color:#0d47a1;">🎉 Gửi Bill thành công!</p>
-                <a href="https://t.me/+3ukiG8Uu109jNGVl" class="btn-reg" style="display:block; text-decoration:none;">VÀO LỚP HỌC NGAY</a>
-                <p style="font-size:12px; color:#666; margin-top:10px;">Lưu ý: Bấm “Yêu cầu tham gia” ở cửa sổ Telegram tiếp theo.</p>
+            
+            <div id="s-box" style="display:none; padding: 10px 0;">
+                <p style="font-weight:bold; color:#0d47a1; font-size:22px; margin-bottom:20px;">🎉 Hệ thống đã nhận được Bill của BẠN</p>
+                
+                <a href="https://t.me/+3ukiG8Uu109jNGVl" class="btn-reg">VÀO LỚP HỌC NGAY</a>
+
+                <div class="final-note">
+                    <b>Lưu ý:</b> Ở cửa sổ Telegram tiếp theo, vui lòng nhấn <b>“Yêu cầu tham gia nhóm”</b>. Admin sẽ xét duyệt và chấp thuận trong vòng tối đa 24 giờ.
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Đếm ngược thông minh không reset khi F5
-        let key = "t_" + "tom_chien";
-        let start = localStorage.getItem(key) || Math.floor(Date.now()/1000);
-        localStorage.setItem(key, start);
+        function updateFileName() {
+            const file = document.getElementById('f').files[0];
+            const display = document.getElementById('fileNameDisplay');
+            const label = document.getElementById('fileLabel');
+            if (file) {
+                display.innerText = "✅ Đã chọn: " + file.name;
+                label.style.borderColor = "#2ecc71"; label.style.color = "#2ecc71";
+            }
+        }
+
+        function parseDate(s) { const p=s.split('/'); return new Date(p[4],p[3]-1,p[2],p[0],p[1]).getTime(); }
+        const end = parseDate("19/20/10/03/2028");
         setInterval(() => {
-            let left = 3600 - (Math.floor(Date.now()/1000) - start);
-            if(left <= 0) { document.getElementById('timer').innerText = "00:00"; return; }
-            let m = Math.floor(left/60), s = left%60;
-            document.getElementById('timer').innerText = (m<10?'0'+m:m)+":"+(s<10?'0'+s:s);
+            const diff = end - new Date().getTime();
+            if(diff <= 0) { document.querySelector('.timer-box').innerText = "Ưu đãi đã kết thúc!"; return; }
+            const h=Math.floor(diff/(1000*60*60)), m=Math.floor((diff%(1000*60*60))/(1000*60)), s=Math.floor((diff%(1000*60))/1000);
+            document.getElementById('timer').innerText = (h<10?'0'+h:h)+":"+(m<10?'0'+m:m)+":"+(s<10?'0'+s:s);
         }, 1000);
 
+        function copyText(txt, msg) {
+            const el = document.createElement('textarea');
+            el.value = txt; document.body.appendChild(el);
+            el.select(); document.execCommand('copy');
+            document.body.removeChild(el); alert(msg);
+        }
+
         async function sendBill() {
-            const n = document.getElementById('nick').value;
-            const file = document.getElementById('f').files[0];
-            if(!n || !file) return alert("Vui lòng nhập Nick và chọn ảnh Bill!");
-            document.querySelector('.btn-submit').innerText = "Đang gửi...";
-            
-            const fd = new FormData();
-            fd.append('chat_id', '6699534762');
-            fd.append('photo', file);
-            fd.append('caption', '🔔 ĐƠN MỚI!\n📗 Khóa: Khóa học Tôm Chiên\n👤 Nick: '+n);
-            await fetch('https://api.telegram.org/bot8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk/sendPhoto', {method:'POST', body:fd});
-            
-            fetch('https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec', {method:'POST', mode:'no-cors', body:JSON.stringify({action:'record_sale', nick:n, courseID:'tom_chien', price:'199.000đ'})});
-            
-            document.getElementById('payForm').style.display='none';
-            document.getElementById('success').style.display='block';
+            const n=document.getElementById('nick').value, file=document.getElementById('f').files[0];
+            if(!n || !file) return alert("BẠN ơi, vui lòng nhập Nick và chọn ảnh Bill nhé!");
+            document.querySelector('.btn-sub').innerText="Đang gửi Bill...";
+            const fd=new FormData(); fd.append('chat_id','6699534762'); fd.append('photo',file); fd.append('caption','🔔 ĐƠN MỚI!\n📗 Khóa: Khóa học Tôm Chiên\n👤 Nick: '+n);
+            await fetch('https://api.telegram.org/bot8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk/sendPhoto',{method:'POST',body:fd});
+            fetch('https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({action:'record_sale',nick:n,courseID:'tom_chien',price:'199.000đ'})});
+            document.getElementById('f-box').style.display='none'; document.getElementById('s-box').style.display='block';
         }
     </script>
-</body>
-</html>
+</body></html>
