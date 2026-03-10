@@ -5,162 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khóa học Thạch Chân Mèo - Bếp Bánh Sunny</title>
     <style>
-        /* GIAO DIỆN CHÍNH */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #fff5f7; 
-            margin: 0; padding: 0; 
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-        }
-        .container { 
-            background: white; padding: 40px; border-radius: 25px; 
-            max-width: 450px; width: 90%; text-align: center;
-            box-shadow: 0 15px 35px rgba(255, 133, 162, 0.2);
-        }
-        h1 { color: #ff5c8a; margin-bottom: 10px; font-size: 26px; }
-        .price-old { text-decoration: line-through; color: #b1b1b1; font-size: 18px; }
-        .price-new { color: #ff2e63; font-size: 32px; font-weight: bold; margin: 10px 0; }
-        .btn-main { 
+        :root { --pink: #ff5c8a; --pink-light: #ffeff1; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        
+        /* GIAO DIỆN THẺ KHÓA HỌC */
+        .card { background: white; width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        
+        /* ẢNH BÌA (Đã thay thành anh-bia.jpg) */
+        .hero { position: relative; width: 100%; height: 240px; background: #000; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; background: rgba(255,255,255,0.85); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .play-btn::after { content: ''; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid #222; margin-left: 5px; }
+
+        /* NỘI DUNG CHI TIẾT */
+        .content { padding: 25px; text-align: left; }
+        h1 { font-size: 24px; color: var(--text); margin: 0 0 8px 0; }
+        p.desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.4; }
+        
+        /* GIÁ CẢ */
+        .price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .price-new { font-size: 34px; font-weight: 800; color: var(--text); }
+        .price-old { font-size: 18px; color: #bbb; text-decoration: line-through; }
+        .discount-tag { background: #ffeff1; color: var(--pink); padding: 4px 10px; border-radius: 8px; font-weight: bold; font-size: 14px; }
+
+        /* ĐẾM NGƯỢC (Gom 1 dòng) */
+        .timer-row { display: flex; align-items: center; gap: 8px; color: #ff2e63; margin-bottom: 25px; font-size: 16px; font-weight: 600; }
+        #timer { font-weight: 800; font-size: 20px; letter-spacing: 1px; }
+
+        /* NÚT ĐĂNG KÝ */
+        .btn-reg { 
             background: linear-gradient(135deg, #ff85a2, #ff5c8a); 
-            color: white; border: none; padding: 15px 40px; 
-            border-radius: 50px; font-size: 20px; cursor: pointer; 
-            font-weight: bold; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 92, 138, 0.4);
+            color: white; border: none; width: 100%; padding: 16px; 
+            border-radius: 12px; font-size: 18px; font-weight: bold; 
+            cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 92, 138, 0.3); 
         }
-        .btn-main:hover { transform: scale(1.05); }
+        .btn-reg:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 92, 138, 0.4); }
 
-        /* POPUP (MODAL) */
-        .modal { 
-            display: none; position: fixed; z-index: 1000; 
-            left: 0; top: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
-        }
-        .modal-content { 
-            background: white; margin: 5% auto; padding: 25px; 
-            border-radius: 20px; width: 90%; max-width: 380px; 
-            position: relative; text-align: center; animation: slideDown 0.4s ease;
-        }
-        @keyframes slideDown { from {top: -100px; opacity: 0;} to {top: 0; opacity: 1;} }
+        /* MODAL THANH TOÁN */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); padding: 20px; display: flex; align-items: center; justify-content: center; }
+        .modal-inner { background: white; width: 100%; max-width: 380px; padding: 30px; border-radius: 25px; text-align: center; position: relative; animation: pop 0.3s ease; }
+        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #ccc; line-height: 1; }
         
-        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #aaa; }
+        input[type="text"] { width: 100%; padding: 14px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
+        .btn-send { background: #333; color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
         
-        /* FORM & INPUT */
-        input[type="text"] { 
-            width: 100%; padding: 12px; margin: 15px 0; 
-            border-radius: 12px; border: 1px solid #ddd; outline: none; box-sizing: border-box;
-        }
-        input[type="file"] { margin: 10px 0 20px 0; font-size: 13px; width: 100%; }
-        .btn-submit { 
-            background: #ff5c8a; color: white; border: none; 
-            padding: 15px; width: 100%; border-radius: 12px; 
-            font-weight: bold; font-size: 16px; cursor: pointer;
-        }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-
-        /* THÔNG BÁO THÀNH CÔNG */
-        #telegramLink { 
-            display: none; background: #e3f2fd; padding: 20px; 
-            border-radius: 15px; margin-top: 20px; border: 2px dashed #2196f3; 
-        }
-        .btn-tele { 
-            display: inline-block; background: #0088cc; color: white; 
-            padding: 12px 25px; border-radius: 10px; text-decoration: none; 
-            font-weight: bold; margin-top: 10px;
-        }
+        #successBox { display: none; margin-top: 20px; padding: 20px; background: #e3f2fd; border-radius: 15px; border: 2px dashed #2196f3; }
+        .btn-tele { display: inline-block; background: #0088cc; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div style="font-size: 50px;">🌸</div>
-    <h1>Khóa học Thạch Chân Mèo</h1>
-    <p>Học bí quyết làm thạch chân mèo cực xinh để bán online!</p>
-    <div class="price-old">399.000đ</div>
-    <div class="price-new">Chỉ 199.000đ</div>
-    <button class="btn-main" onclick="openModal()">Đăng ký ngay</button>
+<div class="card">
+    <div class="hero">
+        <img src="anh-bia.jpg" alt="Thạch Chân Mèo">
+        <div class="play-btn"></div>
+    </div>
+    <div class="content">
+        <h1>Khóa học Thạch Chân Mèo</h1>
+        <p class="desc">Học bí quyết làm thạch chân mèo cực xinh để bán online hiệu quả!</p>
+        
+        <div class="price-row">
+            <span class="price-new" id="show-price">199.000đ</span>
+            <span class="price-old" id="old-price">399.000đ</span>
+            <span class="discount-tag" id="tag">-50%</span>
+        </div>
+
+        <div class="timer-row">
+            <span style="font-size: 20px;">⏰</span>
+            <span>Ưu đãi chỉ còn:</span>
+            <span id="timer">60:00</span>
+        </div>
+
+        <button class="btn-reg" onclick="openModal()">Đăng ký ngay</button>
+    </div>
 </div>
 
-<div id="registerModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h3 style="color: #ff5c8a;">Thanh toán & Nhận link</h3>
-        <p style="margin-bottom: 5px;">Vui lòng chuyển khoản <strong>199.000đ</strong></p>
+<div id="paymentModal" class="modal" style="display:none;">
+    <div class="modal-inner">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 style="margin: 0 0 10px 0;">Thanh toán đơn hàng</h3>
+        <p>Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 20px;">199.000đ</strong></p>
         
-        <img src="qr-thanh-toan.jpg" alt="Mã QR Ngân Hàng" style="width:100%; max-width:240px; border-radius:15px; border: 1px solid #f0f0f0;">
+        <img src="qr-thanh-toan.jpg" style="width:100%; max-width:240px; border-radius:15px; border:1px solid #f0f0f0; margin: 10px 0;">
         
-        <p style="font-size:13px; color: #ff2e63; background: #fff0f3; padding: 10px; border-radius: 10px; border: 1px dashed #ff85a2; margin-top: 10px;">
-            📍 Nội dung CK: <strong>Ghi Tên Zalo của bạn</strong>
+        <p style="font-size:13px; background:#fff0f3; padding:10px; border-radius:10px; color:#ff2e63; border:1px dashed #ff2e63; font-weight: bold;">
+            Nội dung CK: Tên Zalo của bạn
         </p>
-
-        <form id="paymentForm">
+        
+        <form id="payForm">
             <input type="text" id="zaloName" placeholder="Nhập Tên Zalo của bạn" required>
-            <div style="text-align: left; font-size: 13px; color: #666; margin-left: 5px;">Tải lên ảnh Bill chuyển khoản:</div>
-            <input type="file" id="billFile" accept="image/*" required>
-            <button type="submit" id="submitBtn" class="btn-submit">Xác nhận & Nhận link học</button>
+            <p style="text-align:left; font-size:13px; margin: 0 0 5px 5px; color: #666;">Tải ảnh bill chuyển khoản:</p>
+            <input type="file" id="bill" accept="image/*" required style="width:100%; margin-bottom:20px;">
+            <button type="submit" id="submitBtn" class="btn-send">Xác nhận & Nhận link học</button>
         </form>
 
-        <div id="telegramLink">
-            <p style="color: #0d47a1; margin: 0; font-weight: bold;">🎉 Cảm ơn bạn đã tin tưởng!</p>
-            <p style="font-size: 14px;">Bấm vào nút dưới đây để vào lớp nhé:</p>
-            <a href="https://t.me/+6tr9ueF0hyUxNTJl" target="_blank" class="btn-tele">VÀO LỚP HỌC NGAY</a>
+        <div id="successBox">
+            <p style="font-weight:bold; color:#0d47a1; margin:0; font-size: 18px;">🎉 Gửi Bill thành công!</p>
+            <p style="font-size: 14px; margin: 5px 0;">Sunny sẽ check bank và duyệt bạn vào lớp ngay nhé!</p>
+            <a href="https://t.me/+6tr9ueF0hyUxNTJl" target="_blank" class="btn-tele">VÀO NHÓM LỚP HỌC</a>
         </div>
     </div>
 </div>
 
 <script>
-// Cấu hình Bot Telegram của Sunny
-const TELEGRAM_TOKEN = '8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk';
-const TELEGRAM_CHAT_ID = '6699534762';
+// --- CẤU HÌNH ---
+const CONFIG = {
+    token: '8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk',
+    chatId: '6699534762',
+    courseName: 'Khóa Thạch Chân Mèo',
+    duration: 60 * 60 // 60 phút
+};
 
-function openModal() { document.getElementById("registerModal").style.display = "block"; }
-function closeModal() { document.getElementById("registerModal").style.display = "none"; }
+// --- QUẢN LÝ THỜI GIAN (LocalStorage để không bị reset khi load lại trang) ---
+let startTime = localStorage.getItem('sunny_timer_start_thach');
+if (!startTime) {
+    startTime = Date.now();
+    localStorage.setItem('sunny_timer_start_thach', startTime);
+}
 
-// Xử lý khi bấm nút Gửi Bill
-document.getElementById('paymentForm').onsubmit = async (e) => {
+function updateUI(isExpired) {
+    const priceNew = document.getElementById('show-price');
+    const priceOld = document.getElementById('old-price');
+    const tag = document.getElementById('tag');
+    const mPrice = document.getElementById('modal-price');
+    const timerRow = document.querySelector('.timer-row');
+
+    if (isExpired) {
+        priceNew.innerText = "399.000đ";
+        priceOld.style.display = "none";
+        tag.style.display = "none";
+        mPrice.innerText = "399.000đ";
+        timerRow.innerHTML = "🔥 Ưu đãi đã kết thúc!";
+    }
+}
+
+function tick() {
+    const now = Date.now();
+    const elapsed = Math.floor((now - startTime) / 1000);
+    const remaining = CONFIG.duration - elapsed;
+
+    if (remaining > 0) {
+        const mins = Math.floor(remaining / 60);
+        const secs = remaining % 60;
+        document.getElementById('timer').innerText = `${mins < 10 ? '0'+mins : mins}:${secs < 10 ? '0'+secs : secs}`;
+    } else {
+        updateUI(true);
+        clearInterval(timerInterval);
+    }
+}
+
+const timerInterval = setInterval(tick, 1000);
+tick();
+
+// --- MODAL & TELEGRAM ---
+function openModal() { document.getElementById('paymentModal').style.display = 'flex'; }
+function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
+
+document.getElementById('payForm').onsubmit = async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     const zalo = document.getElementById('zaloName').value;
-    const fileInput = document.getElementById('billFile');
-    const file = fileInput.files[0];
+    const file = document.getElementById('bill').files[0];
+    const isExpired = Math.floor((Date.now() - startTime) / 1000) >= CONFIG.duration;
+    const finalPrice = isExpired ? "399.000" : "199.000";
 
-    if (!file) return alert("Vui lòng tải ảnh bill lên nhé!");
-
-    btn.innerText = "Đang gửi bill cho Sunny...";
+    btn.innerText = "Đang gửi xác nhận...";
     btn.disabled = true;
 
-    // Gửi ảnh sang Telegram Bot của bạn
-    const formData = new FormData();
-    formData.append('chat_id', TELEGRAM_CHAT_ID);
-    formData.append('photo', file);
-    formData.append('caption', `🔔 CÓ KHÁCH MỚI THANH TOÁN!\n\n👤 Zalo: ${zalo}\n💰 Số tiền: 199.000đ\n\nBạn kiểm tra tài khoản ngân hàng ngay nhé Sunny!`);
+    const fd = new FormData();
+    fd.append('chat_id', CONFIG.chatId);
+    fd.append('photo', file);
+    fd.append('caption', `🔔 ĐƠN MỚI!\n📗 Khóa: ${CONFIG.courseName}\n👤 Zalo: ${zalo}\n💰 Giá mua: ${finalPrice}đ\nCheck bank ngay nhé Sunny!`);
 
     try {
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendPhoto`, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            // Thành công: Ẩn form, hiện link vào nhóm
-            document.getElementById('paymentForm').style.display = "none";
-            document.getElementById('telegramLink').style.display = "block";
-            // Tự động cuộn xuống link
-            document.getElementById('telegramLink').scrollIntoView({ behavior: 'smooth' });
+        const res = await fetch(`https://api.telegram.org/bot${CONFIG.token}/sendPhoto`, { method: 'POST', body: fd });
+        if (res.ok) {
+            document.getElementById('payForm').style.display = 'none';
+            document.getElementById('successBox').style.display = 'block';
         } else {
-            alert("Hệ thống đang bận, bạn bấm thử lại nhé!");
-            btn.innerText = "Xác nhận & Nhận link học";
+            alert("Lỗi gửi ảnh! Bạn thử lại nhé.");
             btn.disabled = false;
+            btn.innerText = "Xác nhận & Nhận link học";
         }
-    } catch (error) {
-        alert("Lỗi mạng! Bạn kiểm tra lại wifi/4G nha.");
+    } catch (err) {
+        alert("Lỗi kết nối!");
         btn.disabled = false;
     }
 };
 
-// Đóng popup khi click ra ngoài vùng trắng
-window.onclick = function(event) {
-    let modal = document.getElementById("registerModal");
-    if (event.target == modal) { closeModal(); }
-}
+// Đóng khi click ngoài
+window.onclick = (e) => { if(e.target.id === 'paymentModal') closeModal(); }
 </script>
 
 </body>
