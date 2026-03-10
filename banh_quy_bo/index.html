@@ -5,29 +5,27 @@
     <title>Khóa học Bánh Quy Bơ</title>
     <style>
         * { box-sizing: border-box; }
-        :root { --pink: #ff5c8a; --pink-light: #fff5f7; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 15px; margin: 0; }
-        .card { background: white; width: 100%; max-width: 480px; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 45px rgba(0,0,0,0.1); }
+        :root { --pink: #ff5c8a; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 15px; margin: 0; color: #333; }
+        .card { background: white; width: 100%; max-width: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .hero img { width: 100%; height: 260px; object-fit: cover; }
         .content { padding: 25px; text-align: center; }
-        h1 { margin: 0 0 10px 0; font-size: 26px; color: #333; font-weight: 800; }
-        .desc { color: #666; font-size: 15px; margin-bottom: 25px; line-height: 1.6; }
-        .price-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
-        .price-new { font-size: 36px; font-weight: 900; color: var(--pink); }
+        h1 { margin: 0 0 10px 0; font-size: 24px; font-weight: 800; }
+        .desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.5; }
+        .price-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
+        .price-new { font-size: 34px; font-weight: 900; color: var(--pink); }
         .price-old { text-decoration: line-through; color: #bbb; font-size: 18px; }
-        .timer-box { background: #fff9db; padding: 12px; border-radius: 15px; color: #ff2e63; font-weight: bold; margin: 20px 0; font-size: 16px; border: 1px solid #ffeeba; }
-        .curriculum-box { background: var(--pink-light); border-radius: 20px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #ffcad4; }
-        .curr-title { color: var(--pink); font-size: 19px; font-weight: 800; margin-bottom: 15px; border-bottom: 2px solid #ffcad4; padding-bottom: 8px; }
-        .curr-item { color: #444; font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px; }
-        .btn-reg { background: linear-gradient(135deg, #ff85a2, #ff5c8a); color: white; border: none; width: 100%; padding: 20px; border-radius: 18px; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 0 8px 15px rgba(255,92,138,0.2); }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 15px; }
-        .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 30px; padding: 25px; text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
-        .bank-box { background: #f8f9fa; padding: 18px; border-radius: 20px; text-align: left; font-size: 15px; margin: 20px 0; border: 1px solid #eee; }
-        .btn-copy { background: #fff; color: var(--pink); border: 1px solid var(--pink); padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
-        .notice { background: var(--pink-light); padding: 15px; border-radius: 15px; color: #d63031; border: 2px dashed var(--pink); font-weight: 600; font-size: 14px; margin: 20px 0; text-align: left; line-height: 1.5; }
-        .input-nick { width: 100%; padding: 18px; margin-bottom: 20px; border: 2px solid #eee; border-radius: 15px; font-size: 16px; text-align: center; }
-        .btn-sub { background: #333; color: white; border: none; width: 100%; padding: 20px; border-radius: 18px; font-weight: bold; font-size: 18px; cursor: pointer; width: 100%; }
-        .final-note { color: #d63031; font-size: 14px; font-weight: 600; margin-top: 15px; line-height: 1.5; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
+        .timer-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin-bottom: 20px; font-size: 16px; border: 1px solid #ffeeba; }
+        .details-box { text-align: left; border-top: 2px solid #eee; padding-top: 20px; margin-bottom: 25px; white-space: pre-wrap; line-height: 1.7; font-size: 15px; color: #444; }
+        .btn-reg { background: var(--pink); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 0 5px 15px rgba(255,92,138,0.2); }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 15px; }
+        .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 20px; padding: 25px; text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
+        .bank-box { background: #f8f9fa; padding: 15px; border-radius: 15px; text-align: left; font-size: 15px; margin: 15px 0; border: 1px solid #eee; }
+        .btn-copy { background: #fff; color: var(--pink); border: 1px solid var(--pink); padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .notice { background: #fff5f7; padding: 15px; border-radius: 12px; color: #d63031; border: 1px dashed var(--pink); font-size: 14px; margin: 15px 0; text-align: left; line-height: 1.5; font-weight: 600; }
+        .input-nick { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #eee; border-radius: 12px; font-size: 16px; text-align: center; }
+        .btn-sub { background: #333; color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; width: 100%; }
+        .final-note { color: #d63031; font-size: 13px; font-weight: 600; margin-top: 15px; line-height: 1.4; text-align: left; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
@@ -38,30 +36,103 @@
             <p class="desc">Tự tay làm bánh quy bơ thơm lừng tại nhà!</p>
             <div class="price-row"><span class="price-new" id="price-main">199.000đ</span><span class="price-old" id="price-del">399.000đ</span></div>
             <div class="timer-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
-            <div class="curriculum-box"><div class="curr-title">📖 Nội dung khóa học</div><div class="curr-list"><div class="curr-item"><span class="icon">🌸</span> 📚 DANH SÁCH NỘI DUNG KHÓA HỌC</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 1</div><div class="curr-item"><span class="icon">🌸</span> Nguyên liệu chính</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 2</div><div class="curr-item"><span class="icon">🌸</span> Các bước chuẩn bị trước khi làm</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 3</div><div class="curr-item"><span class="icon">🌸</span> Kẹo dẻo Nougat mật ong hạt dinh dưỡng</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 4</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Caramel sữa dừa hạnh nhân</div><div class="curr-item"><span class="icon">🌸</span> (Kẹo dẻo caramel Đài Loan)</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 5</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat Socola</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 6</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat trái cây</div><div class="curr-item"><span class="icon">🌸</span> Cách sử dụng bột lòng trắng – Phương pháp tính độ ẩm</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 7</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat trà sữa đường đen</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 8</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat hạt cao cấp</div><div class="curr-item"><span class="icon">🌸</span> (Công thức quan trọng – từ lòng trắng tươi)</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 9</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat Oreo</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 10</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat vị trà xanh</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 11</div><div class="curr-item"><span class="icon">🌸</span> Bánh bông tuyết ngọt</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 12</div><div class="curr-item"><span class="icon">🌸</span> CT kẹo hạt quả ngũ cốc</div><div class="curr-item"><span class="icon">🌸</span> (Bột lòng trắng trứng)</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 13</div><div class="curr-item"><span class="icon">🌸</span> CT kẹo hạt quả ngũ cốc</div><div class="curr-item"><span class="icon">🌸</span> (Lòng trắng tươi)</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 14</div><div class="curr-item"><span class="icon">🌸</span> Nougat vị trà xanh</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 15</div><div class="curr-item"><span class="icon">🌸</span> Kẹo Nougat vị Red Velvet – Nhung đỏ</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 16</div><div class="curr-item"><span class="icon">🌸</span> CT kẹo Nougat vị Tiramisu</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 17</div><div class="curr-item"><span class="icon">🌸</span> Bánh bông tuyết chà bông trứng muối rong biển</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 18</div><div class="curr-item"><span class="icon">🌸</span> Bánh quy kẹp sữa</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 19</div><div class="curr-item"><span class="icon">🌸</span> Kẹo / bánh gạo lứt rong biển</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 20</div><div class="curr-item"><span class="icon">🌸</span> Kẹo / bánh chà bông trứng muối gạo lứt</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 21</div><div class="curr-item"><span class="icon">🌸</span> Kẹo dẻo trái cây Đài Loan</div><div class="curr-item"><span class="icon">🌸</span> HƯỚNG DẪN 22</div><div class="curr-item"><span class="icon">🌸</span> Công thức kẹo Nougat / bánh bông tuyết từ Marshmallow</div></div></div>
+            <div class="details-box"><b>Nội dung chương trình:</b>
+📚 DANH SÁCH NỘI DUNG KHÓA HỌC
+
+HƯỚNG DẪN 1  
+Nguyên liệu chính
+
+HƯỚNG DẪN 2  
+Các bước chuẩn bị trước khi làm
+
+HƯỚNG DẪN 3  
+Kẹo dẻo Nougat mật ong hạt dinh dưỡng
+
+HƯỚNG DẪN 4  
+Kẹo Caramel sữa dừa hạnh nhân  
+(Kẹo dẻo caramel Đài Loan)
+
+HƯỚNG DẪN 5  
+Kẹo Nougat Socola
+
+HƯỚNG DẪN 6  
+Kẹo Nougat trái cây  
+Cách sử dụng bột lòng trắng – Phương pháp tính độ ẩm
+
+HƯỚNG DẪN 7  
+Kẹo Nougat trà sữa đường đen
+
+HƯỚNG DẪN 8  
+Kẹo Nougat hạt cao cấp  
+(Công thức quan trọng – từ lòng trắng tươi)
+
+HƯỚNG DẪN 9  
+Kẹo Nougat Oreo
+
+HƯỚNG DẪN 10  
+Kẹo Nougat vị trà xanh
+
+HƯỚNG DẪN 11  
+Bánh bông tuyết ngọt
+
+HƯỚNG DẪN 12  
+CT kẹo hạt quả ngũ cốc  
+(Bột lòng trắng trứng)
+
+HƯỚNG DẪN 13  
+CT kẹo hạt quả ngũ cốc  
+(Lòng trắng tươi)
+
+HƯỚNG DẪN 14  
+Nougat vị trà xanh
+
+HƯỚNG DẪN 15  
+Kẹo Nougat vị Red Velvet – Nhung đỏ
+
+HƯỚNG DẪN 16  
+CT kẹo Nougat vị Tiramisu
+
+HƯỚNG DẪN 17  
+Bánh bông tuyết chà bông trứng muối rong biển
+
+HƯỚNG DẪN 18  
+Bánh quy kẹp sữa
+
+HƯỚNG DẪN 19  
+Kẹo / bánh gạo lứt rong biển
+
+HƯỚNG DẪN 20  
+Kẹo / bánh chà bông trứng muối gạo lứt
+
+HƯỚNG DẪN 21  
+Kẹo dẻo trái cây Đài Loan
+
+HƯỚNG DẪN 22  
+Công thức kẹo Nougat / bánh bông tuyết từ Marshmallow
+</div>
             <button class="btn-reg" onclick="document.getElementById('m').style.display='flex'">Đăng ký ngay</button>
         </div>
     </div>
     <div id="m" class="modal">
         <div class="modal-inner">
-            <span style="position:absolute; top:15px; right:20px; font-size:35px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
-            <h2 style="margin-bottom:10px;">Thanh toán học phí</h2>
-            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:28px; margin:10px 0;">199.000đ</p>
-            <img src="/Images/qr-thanh-toan.jpg" style="width:190px; border-radius:20px; margin-bottom:15px; border:1px solid #eee;">
-            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-copy" style="text-decoration:none; padding:10px 20px; display:inline-block; margin-bottom:15px;">📥 Tải mã QR về máy</a>
+            <span style="position:absolute; top:10px; right:15px; font-size:30px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
+            <h3 style="margin:0 0 10px 0;">Thanh toán học phí</h3>
+            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:26px; margin:0 0 10px 0;">199.000đ</p>
+            <img src="/Images/qr-thanh-toan.jpg" style="width:180px; border-radius:15px; border:1px solid #eee; margin-bottom:10px;">
+            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-copy" style="text-decoration:none; padding:8px 15px; display:inline-block; margin-bottom:15px;">📥 Tải mã QR về máy</a>
             <div class="bank-box">
-                <p>Ngân hàng: <b>MB Bank</b></p>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><span>STK: <b style="font-size:18px;">8877848800613</b></span><button class="btn-copy" onclick="copyText('8877848800613', 'Đã copy STK!')">Copy</button></div>
-                <p>Chủ TK: <b>LUU THI HOA</b></p><p style="color:#d63031;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
+                <p style="margin:0 0 5px 0;">Ngân hàng: <b>MB Bank</b></p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;"><span>STK: <b>8877848800613</b></span><button class="btn-copy" onclick="copyText('8877848800613', 'Đã copy STK!')">Copy</button></div>
+                <p style="margin:0 0 5px 0;">Chủ TK: <b>LUU THI HOA</b></p><p style="color:#d63031;margin:0;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
             </div>
             <div id="f-box">
                 <div class="notice">Sau khi hoàn tất chuyển khoản, BẠN hãy nhập tên Nick Telegram vào ô dưới, tải ảnh Bill và ấn Xác nhận.</div>
                 <input type="text" id="nick" class="input-nick" placeholder="Nhập tên Nick Telegram của BẠN">
-                <label for="f" id="fileLabel" style="display:block; border:3px dashed #ff85a2; color:#ff5c8a; padding:20px; border-radius:15px; font-weight:bold; cursor:pointer; margin-bottom:20px;">📸 Tải ảnh Bill tại đây</label>
+                <label for="f" id="fileLabel" style="display:block; border:2px dashed #ff85a2; color:#ff5c8a; padding:15px; border-radius:12px; font-weight:bold; cursor:pointer; margin-bottom:15px;">📸 Tải ảnh Bill tại đây</label>
                 <input type="file" id="f" accept="image/*" style="display:none" onchange="document.getElementById('fileLabel').innerText='✅ Đã chọn ảnh bill'">
                 <button class="btn-sub" onclick="sendBill()">Xác nhận & nhận link học</button>
             </div>
-            <div id="s-box" style="display:none"><p style="font-weight:bold; color:#0d47a1; font-size:20px;">🎉 Hệ thống đã nhận được Bill của BẠN</p><a href="https://t.me/+6tr9ueF0hyUxNTJl" class="btn-reg" style="text-decoration:none;">VÀO LỚP HỌC NGAY</a><div class="final-note"><b>Lưu ý:</b> Ở cửa sổ Telegram tiếp theo, vui lòng nhấn <b>“Yêu cầu tham gia nhóm”</b>. Admin sẽ xét duyệt trong vòng 24 giờ.</div></div>
+            <div id="s-box" style="display:none"><p style="font-weight:bold; color:#0d47a1; font-size:18px;">🎉 Hệ thống đã nhận được Bill của BẠN</p><a href="https://t.me/+6tr9ueF0hyUxNTJl" class="btn-reg" style="text-decoration:none; display:block; margin-top:15px;">VÀO LỚP HỌC NGAY</a><div class="final-note"><b>Lưu ý:</b> Ở cửa sổ Telegram tiếp theo, vui lòng nhấn <b>“Yêu cầu tham gia nhóm”</b>. Admin sẽ xét duyệt trong vòng 24 giờ.</div></div>
         </div>
     </div>
     <script>
@@ -80,11 +151,14 @@
         function copyText(txt, msg) { const el = document.createElement('textarea'); el.value = txt; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); alert(msg); }
         async function sendBill() {
             const n=document.getElementById('nick').value, file=document.getElementById('f').files[0];
-            if(!n || !file) return alert("BẠN ơi, vui lòng nhập Nick và chọn ảnh Bill nhé!");
+            if(!n || !file) return alert("Vui lòng nhập Nick và chọn ảnh Bill!");
+            const currentPrice = document.getElementById('modal-price').innerText;
+            const now = new Date(); const fullTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ' ngày ' + now.getDate().toString().padStart(2, '0') + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getFullYear();
             document.querySelector('.btn-sub').innerText="Đang gửi Bill...";
-            const fd=new FormData(); fd.append('chat_id','6699534762'); fd.append('photo',file); fd.append('caption','🔔 ĐƠN MỚI!\n📗 Khóa: Khóa học Bánh Quy Bơ\n👤 Nick: '+n);
+            const caption = "🔔 ĐƠN MỚI TỪ BẾP BÁNH!\n\n📗 Khóa: Khóa học Bánh Quy Bơ\n👤 Nick Telegram: " + n + "\n💰 Giá mua: " + currentPrice + "\n⏰ Thời gian: " + fullTime + "\n\nCheck bank và ghi sổ thành công!";
+            const fd=new FormData(); fd.append('chat_id','6699534762'); fd.append('photo',file); fd.append('caption', caption);
             await fetch('https://api.telegram.org/bot8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk/sendPhoto',{method:'POST',body:fd});
-            fetch('https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({action:'record_sale',nick:n,courseID:'banh_quy_bo',price:'199.000đ'})});
+            fetch('https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({action:'record_sale',nick:n,courseID:'banh_quy_bo',price:currentPrice})});
             document.getElementById('f-box').style.display='none'; document.getElementById('s-box').style.display='block';
         }
     </script>
