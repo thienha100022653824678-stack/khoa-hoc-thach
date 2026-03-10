@@ -8,7 +8,7 @@
         :root { --pink: #ff5c8a; --pink-light: #ffeff1; --text: #333; --blue-tele: #0088cc; --warning: #fff9db; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         
-        /* CARD CHÍNH */
+        /* CARD TRÌNH BÀY */
         .card { background: white; width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
         .hero { width: 100%; height: 260px; background: #eee; }
         .hero img { width: 100%; height: 100%; object-fit: cover; }
@@ -27,7 +27,7 @@
         .modal-inner { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 25px; text-align: center; position: relative; max-height: 98vh; overflow-y: auto; }
         .close { position: absolute; top: 10px; right: 15px; font-size: 30px; cursor: pointer; color: #ccc; }
         
-        /* BANK INFO */
+        /* THÔNG TIN NGÂN HÀNG */
         .bank-details { background: #f9f9f9; padding: 12px; border-radius: 12px; margin: 10px 0; text-align: left; font-size: 14px; border: 1px solid #eee; }
         .bank-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .bank-item b { color: #222; font-size: 15px; }
@@ -35,14 +35,14 @@
 
         .btn-download-qr { background: #fff; color: var(--pink); border: 2px solid var(--pink); padding: 8px 15px; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; margin: 5px 0 10px 0; display: inline-block; }
 
-        /* BOX CẢNH BÁO */
+        /* BOX NHẮC NHỞ */
         .content-warning { background: var(--warning); padding: 15px; border-radius: 12px; border: 2px solid #fab005; margin: 15px 0; text-align: left; font-size: 14px; line-height: 1.4; }
         .content-warning b { color: #e67e22; display: block; margin-bottom: 4px; }
 
         /* BOX HƯỚNG DẪN */
         .highlight-box { background: #fff0f3; padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed #ff5c8a; font-weight: bold; font-size: 14px; margin: 10px 0 15px 0; line-height: 1.5; text-align: left; }
 
-        /* NÚT TẢI FILE SIÊU TO */
+        /* NÚT TẢI ẢNH BILL TO */
         .custom-file-upload { display: block; width: 100%; padding: 16px; background: #fff; border: 2px solid #ff85a2; color: #ff5c8a; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; box-sizing: border-box; text-align: center; }
         #bill { display: none; }
         #file-name { display: block; margin-top: 5px; font-size: 13px; color: #2ecc71; font-weight: bold; text-align: center; }
@@ -50,7 +50,7 @@
         input[type="text"] { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; background: #fff; }
         .btn-send { background: #333; color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 10px; }
 
-        /* SUCCESS BOX */
+        /* HỘP THÀNH CÔNG */
         #successBox { display: none; margin-top: 10px; padding: 10px; }
         .btn-tele { display: inline-block; background: var(--blue-tele); color: white; padding: 18px 25px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 5px; font-size: 18px; width: 100%; box-sizing: border-box; }
         .success-desc { font-size: 14px; color: #555; margin-top: 15px; line-height: 1.5; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae7ff; text-align: left; }
@@ -131,10 +131,10 @@
 
 <script>
 // ============================================================
-// CẤU HÌNH TỔNG - BẠN CÓ THỂ TỰ SỬA CÁC DÒNG NÀY CHO KHÓA SAU
+// CẤU HÌNH TỔNG - ĐÃ SỬA ID THÀNH thach_chan_meo_01
 const CONFIG = {
     scriptUrl: 'https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec',
-    courseID: 'thach_chan_me_01',
+    courseID: 'thach_chan_meo_01', 
     courseName: 'Khóa học Thạch Chân Mèo',
     courseDesc: 'Học bí quyết làm thạch chân mèo cực xinh để bán online hiệu quả!',
     heroImg: 'anh-bia.jpg',
@@ -220,7 +220,7 @@ document.getElementById('payForm').onsubmit = async (e) => {
     btn.innerText = "Đang gửi xác nhận...";
     btn.disabled = true;
 
-    // Ghi sổ Google Sheets
+    // 1. Ghi sổ Google Sheets (Gửi action record_sale)
     try {
         fetch(CONFIG.scriptUrl, {
             method: 'POST',
@@ -229,7 +229,7 @@ document.getElementById('payForm').onsubmit = async (e) => {
         });
     } catch (e) {}
 
-    // Gửi Telegram
+    // 2. Gửi ảnh Telegram
     const now = new Date();
     const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + " ngày " + now.toLocaleDateString('vi-VN');
     const fd = new FormData();
