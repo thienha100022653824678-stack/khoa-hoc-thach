@@ -5,26 +5,29 @@
     <title>Khóa học Bánh Chuối</title>
     <style>
         * { box-sizing: border-box; }
-        :root { --pink: #ff5c8a; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 15px; margin: 0; color: #333; }
-        .card { background: white; width: 100%; max-width: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        :root { --pink: #ff5c8a; --bg: #e9e9e9; } /* NỀN TRẦM HÀI HÒA */
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; margin: 0; color: #333; }
+        .card { background: white; width: 100%; max-width: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
         .hero img { width: 100%; height: 260px; object-fit: cover; }
-        .content { padding: 25px; text-align: center; }
+        .content { padding: 30px; text-align: center; }
         h1 { margin: 0 0 10px 0; font-size: 24px; font-weight: 800; }
-        .desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.5; }
-        .price-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
+        .desc { color: #666; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
+        .price-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; }
         .price-new { font-size: 34px; font-weight: 900; color: var(--pink); }
         .price-old { text-decoration: line-through; color: #bbb; font-size: 18px; }
-        .timer-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin-bottom: 20px; font-size: 16px; border: 1px solid #ffeeba; }
-        .details-box { text-align: left; border-top: 2px solid #eee; padding-top: 20px; margin-bottom: 25px; white-space: pre-wrap; line-height: 1.7; font-size: 15px; color: #444; }
-        .btn-reg { background: var(--pink); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 0 5px 15px rgba(255,92,138,0.2); }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 15px; }
-        .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 20px; padding: 25px; text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
-        .bank-box { background: #f8f9fa; padding: 15px; border-radius: 15px; text-align: left; font-size: 15px; margin: 15px 0; border: 1px solid #eee; }
-        .btn-copy { background: #fff; color: var(--pink); border: 1px solid var(--pink); padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        
+        /* BOX SALE */
+        #sale-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin-bottom: 25px; font-size: 16px; border: 1px solid #ffeeba; }
+        
+        .details-box { text-align: left; border-top: 1px solid #eee; padding-top: 25px; margin-bottom: 30px; white-space: pre-wrap; line-height: 1.7; font-size: 15px; color: #444; }
+        .btn-reg { background: var(--pink); color: white; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 0 8px 20px rgba(255,92,138,0.25); }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 15px; }
+        .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 25px; padding: 30px; text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
+        .bank-box { background: #f8f9fa; padding: 18px; border-radius: 15px; text-align: left; font-size: 15px; margin: 20px 0; border: 1px solid #eee; }
+        .btn-copy { background: #fff; color: var(--pink); border: 1px solid var(--pink); padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
         .notice { background: #fff5f7; padding: 15px; border-radius: 12px; color: #d63031; border: 1px dashed var(--pink); font-size: 14px; margin: 15px 0; text-align: left; line-height: 1.5; font-weight: 600; }
-        .input-nick { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #eee; border-radius: 12px; font-size: 16px; text-align: center; }
-        .btn-sub { background: #333; color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; width: 100%; }
+        .input-nick { width: 100%; padding: 18px; margin-bottom: 20px; border: 1px solid #eee; border-radius: 12px; font-size: 16px; text-align: center; }
+        .btn-sub { background: #333; color: white; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: bold; font-size: 18px; cursor: pointer; width: 100%; }
         .final-note { color: #d63031; font-size: 13px; font-weight: 600; margin-top: 15px; line-height: 1.4; text-align: left; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
@@ -35,7 +38,7 @@
             <h1>Khóa học Bánh Chuối</h1>
             <p class="desc">Tự tay làm bánh Chuối chiên tại nhà!</p>
             <div class="price-row"><span class="price-new" id="price-main">199.000đ</span><span class="price-old" id="price-del">399.000đ</span></div>
-            <div class="timer-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
+            <div id="sale-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
             <div class="details-box"><b>Nội dung chương trình:</b>
 📚 NỘI DUNG LỚP HỌC
 
@@ -53,24 +56,24 @@
     </div>
     <div id="m" class="modal">
         <div class="modal-inner">
-            <span style="position:absolute; top:10px; right:15px; font-size:30px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
-            <h3 style="margin:0 0 10px 0;">Thanh toán học phí</h3>
-            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:26px; margin:0 0 10px 0;">199.000đ</p>
-            <img src="/Images/qr-thanh-toan.jpg" style="width:180px; border-radius:15px; border:1px solid #eee; margin-bottom:10px;">
-            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-copy" style="text-decoration:none; padding:8px 15px; display:inline-block; margin-bottom:15px;">📥 Tải mã QR về máy</a>
+            <span style="position:absolute; top:15px; right:20px; font-size:35px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
+            <h2 style="margin-bottom:10px;">Thanh toán học phí</h2>
+            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:28px; margin:10px 0;">199.000đ</p>
+            <img src="/Images/qr-thanh-toan.jpg" style="width:190px; border-radius:20px; border:1px solid #eee; margin-bottom:15px;">
+            <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-copy" style="text-decoration:none; padding:10px 20px; display:inline-block; margin-bottom:15px;">📥 Tải mã QR về máy</a>
             <div class="bank-box">
-                <p style="margin:0 0 5px 0;">Ngân hàng: <b>MB Bank</b></p>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;"><span>STK: <b>8877848800613</b></span><button class="btn-copy" onclick="copyText('8877848800613', 'Đã copy STK!')">Copy</button></div>
-                <p style="margin:0 0 5px 0;">Chủ TK: <b>LUU THI HOA</b></p><p style="color:#d63031;margin:0;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
+                <p>Ngân hàng: <b>MB Bank</b></p>
+                <div style="display:flex; justify-content:space-between; align-items:center;"><span>STK: <b>8877848800613</b></span><button class="btn-copy" onclick="copyText('8877848800613', 'Đã copy STK!')">Copy</button></div>
+                <p>Chủ TK: <b>LUU THI HOA</b></p><p style="color:#d63031;">Nội dung ck: <b>Để mặc định tên của BẠN</b></p>
             </div>
             <div id="f-box">
                 <div class="notice">Sau khi hoàn tất chuyển khoản, BẠN hãy nhập tên Nick Telegram vào ô dưới, tải ảnh Bill và ấn Xác nhận.</div>
                 <input type="text" id="nick" class="input-nick" placeholder="Nhập tên Nick Telegram của BẠN">
-                <label for="f" id="fileLabel" style="display:block; border:2px dashed #ff85a2; color:#ff5c8a; padding:15px; border-radius:12px; font-weight:bold; cursor:pointer; margin-bottom:15px;">📸 Tải ảnh Bill tại đây</label>
+                <label for="f" id="fileLabel" style="display:block; border:2px dashed #ff85a2; color:#ff5c8a; padding:18px; border-radius:12px; font-weight:bold; cursor:pointer; margin-bottom:20px;">📸 Tải ảnh Bill tại đây</label>
                 <input type="file" id="f" accept="image/*" style="display:none" onchange="document.getElementById('fileLabel').innerText='✅ Đã chọn ảnh bill'">
                 <button class="btn-sub" onclick="sendBill()">Xác nhận & nhận link học</button>
             </div>
-            <div id="s-box" style="display:none"><p style="font-weight:bold; color:#0d47a1; font-size:18px;">🎉 Hệ thống đã nhận được Bill của BẠN</p><a href="https://t.me/+7LU0n_k7QUVhNjU9" class="btn-reg" style="text-decoration:none; display:block; margin-top:15px;">VÀO LỚP HỌC NGAY</a><div class="final-note"><b>Lưu ý:</b> Ở cửa sổ Telegram tiếp theo, vui lòng nhấn <b>“Yêu cầu tham gia nhóm”</b>. Admin sẽ xét duyệt trong vòng 24 giờ.</div></div>
+            <div id="s-box" style="display:none"><p style="font-weight:bold; color:#0d47a1; font-size:22px;">🎉 Hệ thống đã nhận được Bill</p><a href="https://t.me/+7LU0n_k7QUVhNjU9" class="btn-reg" style="text-decoration:none;">VÀO LỚP HỌC NGAY</a><div class="final-note"><b>Lưu ý:</b> Nhấn <b>“Yêu cầu tham gia nhóm”</b> ở Telegram. Admin duyệt trong 24h.</div></div>
         </div>
     </div>
     <script>
@@ -79,7 +82,8 @@
         setInterval(() => {
             const diff = end - new Date().getTime();
             if(diff <= 0) { 
-                document.getElementById('timer').innerText = "Hết hạn!"; document.getElementById('price-main').innerText = "399.000đ";
+                document.getElementById('sale-box').style.display = 'none'; // ẨN HOÀN TOÀN BOX VÀNG
+                document.getElementById('price-main').innerText = "399.000đ";
                 if(document.getElementById('price-del')) document.getElementById('price-del').style.display='none';
                 document.getElementById('modal-price').innerText = "399.000đ"; return; 
             }
