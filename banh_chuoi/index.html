@@ -5,7 +5,7 @@
     <title>Khóa học Bánh Chuối</title>
     <style>
         * { box-sizing: border-box; }
-        :root { --pink: #ff5c8a; --bg: #e9e9e9; } /* NỀN TRẦM HÀI HÒA */
+        :root { --pink: #ff5c8a; --bg: #e9e9e9; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; margin: 0; color: #333; }
         .card { background: white; width: 100%; max-width: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
         .hero img { width: 100%; height: 260px; object-fit: cover; }
@@ -15,12 +15,9 @@
         .price-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; }
         .price-new { font-size: 34px; font-weight: 900; color: var(--pink); }
         .price-old { text-decoration: line-through; color: #bbb; font-size: 18px; }
-        
-        /* BOX SALE */
-        #sale-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin-bottom: 25px; font-size: 16px; border: 1px solid #ffeeba; }
-        
+        .timer-box { background: #fff9db; padding: 12px; border-radius: 12px; color: #ff2e63; font-weight: bold; margin-bottom: 25px; font-size: 16px; border: 1px solid #ffeeba; display:none; }
         .details-box { text-align: left; border-top: 1px solid #eee; padding-top: 25px; margin-bottom: 30px; white-space: pre-wrap; line-height: 1.7; font-size: 15px; color: #444; }
-        .btn-reg { background: var(--pink); color: white; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 20px; box-shadow: 0 8px 20px rgba(255,92,138,0.25); }
+        .btn-reg { background: var(--pink); color: white; border: none; width: 100%; padding: 20px; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 20px; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 15px; }
         .modal-inner { background: white; width: 100%; max-width: 400px; border-radius: 25px; padding: 30px; text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
         .bank-box { background: #f8f9fa; padding: 18px; border-radius: 15px; text-align: left; font-size: 15px; margin: 20px 0; border: 1px solid #eee; }
@@ -37,8 +34,11 @@
         <div class="content">
             <h1>Khóa học Bánh Chuối</h1>
             <p class="desc">Tự tay làm bánh Chuối chiên tại nhà!</p>
-            <div class="price-row"><span class="price-new" id="price-main">199.000đ</span><span class="price-old" id="price-del">399.000đ</span></div>
-            <div id="sale-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
+            <div class="price-row">
+                <span class="price-new" id="price-main">399.000đ</span>
+                
+            </div>
+            <div class="timer-box" id="sale-box">Giá Sale kết thúc sau: ⏱ <span id="timer">...</span></div>
             <div class="details-box"><b>Nội dung chương trình:</b>
 📚 NỘI DUNG LỚP HỌC
 
@@ -58,7 +58,7 @@
         <div class="modal-inner">
             <span style="position:absolute; top:15px; right:20px; font-size:35px; cursor:pointer;" onclick="document.getElementById('m').style.display='none'">&times;</span>
             <h2 style="margin-bottom:10px;">Thanh toán học phí</h2>
-            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:28px; margin:10px 0;">199.000đ</p>
+            <p id="modal-price" style="color:var(--pink); font-weight:900; font-size:28px; margin:10px 0;">399.000đ</p>
             <img src="/Images/qr-thanh-toan.jpg" style="width:190px; border-radius:20px; border:1px solid #eee; margin-bottom:15px;">
             <br><a href="/Images/qr-thanh-toan.jpg" download class="btn-copy" style="text-decoration:none; padding:10px 20px; display:inline-block; margin-bottom:15px;">📥 Tải mã QR về máy</a>
             <div class="bank-box">
@@ -82,13 +82,13 @@
         setInterval(() => {
             const diff = end - new Date().getTime();
             if(diff <= 0) { 
-                document.getElementById('sale-box').style.display = 'none'; // ẨN HOÀN TOÀN BOX VÀNG
+                if(document.getElementById('sale-box')) document.getElementById('sale-box').style.display = 'none';
                 document.getElementById('price-main').innerText = "399.000đ";
                 if(document.getElementById('price-del')) document.getElementById('price-del').style.display='none';
                 document.getElementById('modal-price').innerText = "399.000đ"; return; 
             }
             const h=Math.floor(diff/(1000*60*60)), m=Math.floor((diff%(1000*60*60))/(1000*60)), s=Math.floor((diff%(1000*60))/1000);
-            document.getElementById('timer').innerText = (h<10?'0'+h:h)+":"+(m<10?'0'+m:m)+":"+(s<10?'0'+s:s);
+            if(document.getElementById('timer')) document.getElementById('timer').innerText = (h<10?'0'+h:h)+":"+(m<10?'0'+m:m)+":"+(s<10?'0'+s:s);
         }, 1000);
         function copyText(txt, msg) { const el = document.createElement('textarea'); el.value = txt; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); alert(msg); }
         async function sendBill() {
