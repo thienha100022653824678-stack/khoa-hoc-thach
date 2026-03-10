@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khóa học Thạch Chân Mèo - Bếp Bánh Sunny</title>
+    <title>Bếp Bánh Sunny - Hệ Thống Khóa Học Online</title>
     <style>
         :root { --pink: #ff5c8a; --pink-light: #ffeff1; --text: #333; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
@@ -11,46 +11,39 @@
         /* GIAO DIỆN THẺ KHÓA HỌC */
         .card { background: white; width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
         
-        /* ẢNH BÌA (Đã thay thành anh-bia.jpg) */
-        .hero { position: relative; width: 100%; height: 240px; background: #000; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; background: rgba(255,255,255,0.85); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; }
-        .play-btn::after { content: ''; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid #222; margin-left: 5px; }
+        /* ẢNH BÌA (Đã xóa biểu tượng Play) */
+        .hero { width: 100%; height: 260px; background: #eee; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; }
 
         /* NỘI DUNG CHI TIẾT */
         .content { padding: 25px; text-align: left; }
         h1 { font-size: 24px; color: var(--text); margin: 0 0 8px 0; }
-        p.desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.4; }
+        p.desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.5; min-height: 45px; }
         
-        /* GIÁ CẢ */
+        /* GIÁ CẢ (Đã xóa % giảm giá) */
         .price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
         .price-new { font-size: 34px; font-weight: 800; color: var(--text); }
         .price-old { font-size: 18px; color: #bbb; text-decoration: line-through; }
-        .discount-tag { background: #ffeff1; color: var(--pink); padding: 4px 10px; border-radius: 8px; font-weight: bold; font-size: 14px; }
 
-        /* ĐẾM NGƯỢC (Gom 1 dòng) */
+        /* ĐẾM NGƯỢC */
         .timer-row { display: flex; align-items: center; gap: 8px; color: #ff2e63; margin-bottom: 25px; font-size: 16px; font-weight: 600; }
-        #timer { font-weight: 800; font-size: 20px; letter-spacing: 1px; }
+        #timer { font-weight: 800; font-size: 20px; }
 
         /* NÚT ĐĂNG KÝ */
         .btn-reg { 
             background: linear-gradient(135deg, #ff85a2, #ff5c8a); 
             color: white; border: none; width: 100%; padding: 16px; 
             border-radius: 12px; font-size: 18px; font-weight: bold; 
-            cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 92, 138, 0.3); 
+            cursor: pointer; box-shadow: 0 5px 20px rgba(255, 92, 138, 0.3); 
         }
-        .btn-reg:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 92, 138, 0.4); }
 
         /* MODAL THANH TOÁN */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); padding: 20px; display: flex; align-items: center; justify-content: center; }
-        .modal-inner { background: white; width: 100%; max-width: 380px; padding: 30px; border-radius: 25px; text-align: center; position: relative; animation: pop 0.3s ease; }
-        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #ccc; line-height: 1; }
-        
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-inner { background: white; width: 100%; max-width: 380px; padding: 30px; border-radius: 25px; text-align: center; position: relative; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #ccc; }
         input[type="text"] { width: 100%; padding: 14px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
-        .btn-send { background: #333; color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
-        
-        #successBox { display: none; margin-top: 20px; padding: 20px; background: #e3f2fd; border-radius: 15px; border: 2px dashed #2196f3; }
+        .btn-send { background: #333; color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        #successBox { display: none; margin-top: 20px; }
         .btn-tele { display: inline-block; background: #0088cc; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
@@ -58,22 +51,20 @@
 
 <div class="card">
     <div class="hero">
-        <img src="anh-bia.jpg" alt="Thạch Chân Mèo">
-        <div class="play-btn"></div>
+        <img id="heroImg" src="" alt="Course Image">
     </div>
     <div class="content">
-        <h1>Khóa học Thạch Chân Mèo</h1>
-        <p class="desc">Học bí quyết làm thạch chân mèo cực xinh để bán online hiệu quả!</p>
+        <h1 id="mainTitle">Loading...</h1>
+        <p class="desc" id="mainDesc">Loading...</p>
         
         <div class="price-row">
-            <span class="price-new" id="show-price">199.000đ</span>
-            <span class="price-old" id="old-price">399.000đ</span>
-            <span class="discount-tag" id="tag">-50%</span>
+            <span class="price-new" id="show-price">0đ</span>
+            <span class="price-old" id="old-price">0đ</span>
         </div>
 
         <div class="timer-row">
-            <span style="font-size: 20px;">⏰</span>
-            <span>Ưu đãi chỉ còn:</span>
+            <span style="font-size: 20px;">⏱</span>
+            <span id="timer-label">Ưu đãi chỉ còn:</span>
             <span id="timer">60:00</span>
         </div>
 
@@ -81,123 +72,113 @@
     </div>
 </div>
 
-<div id="paymentModal" class="modal" style="display:none;">
+<div id="paymentModal" class="modal">
     <div class="modal-inner">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h3 style="margin: 0 0 10px 0;">Thanh toán đơn hàng</h3>
-        <p>Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 20px;">199.000đ</strong></p>
-        
-        <img src="qr-thanh-toan.jpg" style="width:100%; max-width:240px; border-radius:15px; border:1px solid #f0f0f0; margin: 10px 0;">
-        
-        <p style="font-size:13px; background:#fff0f3; padding:10px; border-radius:10px; color:#ff2e63; border:1px dashed #ff2e63; font-weight: bold;">
-            Nội dung CK: Tên Zalo của bạn
-        </p>
+        <h3 style="margin: 0 0 10px 0;">Thanh toán khóa học</h3>
+        <p>Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 22px;">0đ</strong></p>
+        <img id="qrImg" src="" style="width:100%; max-width:240px; border-radius:15px; margin: 10px 0; border: 1px solid #eee;">
+        <p style="font-size:12px; background:#fff0f3; padding:10px; border-radius:10px; color:#ff2e63; border:1px dashed #ff2e63; font-weight:bold;">Nội dung CK: Tên Zalo của bạn</p>
         
         <form id="payForm">
             <input type="text" id="zaloName" placeholder="Nhập Tên Zalo của bạn" required>
-            <p style="text-align:left; font-size:13px; margin: 0 0 5px 5px; color: #666;">Tải ảnh bill chuyển khoản:</p>
+            <p style="text-align:left; font-size:12px; margin-bottom:5px; color:#666;">Tải ảnh bill chuyển khoản:</p>
             <input type="file" id="bill" accept="image/*" required style="width:100%; margin-bottom:20px;">
             <button type="submit" id="submitBtn" class="btn-send">Xác nhận & Nhận link học</button>
         </form>
 
         <div id="successBox">
-            <p style="font-weight:bold; color:#0d47a1; margin:0; font-size: 18px;">🎉 Gửi Bill thành công!</p>
-            <p style="font-size: 14px; margin: 5px 0;">Sunny sẽ check bank và duyệt bạn vào lớp ngay nhé!</p>
-            <a href="https://t.me/+6tr9ueF0hyUxNTJl" target="_blank" class="btn-tele">VÀO NHÓM LỚP HỌC</a>
+            <p style="font-weight:bold; color:#0d47a1;">🎉 Gửi Bill thành công!</p>
+            <a id="groupLink" href="#" target="_blank" class="btn-tele">VÀO LỚP HỌC NGAY</a>
         </div>
     </div>
 </div>
 
 <script>
-// --- CẤU HÌNH ---
+// ============================================================
+// CHỈ CẦN SỬA CÁC GIÁ TRỊ TRONG CONFIG NÀY
 const CONFIG = {
+    courseID: 'thach_chan_meo_01', // KHÔNG dùng dấu cách ở đây
+    courseName: 'Khóa học Thạch Chân Mèo',
+    courseDesc: 'Học bí quyết làm thạch chân mèo cực xinh để bán online hiệu quả!',
+    heroImg: 'anh-bia.jpg',
+    qrImg: 'qr-thanh-toan.jpg',
+    priceSale: '199.000đ',
+    priceOld: '399.000đ',
+    teleLink: 'https://t.me/+6tr9ueF0hyUxNTJl',
+    
+    // Thông tin Bot Telegram cố định
     token: '8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk',
     chatId: '6699534762',
-    courseName: 'Khóa Thạch Chân Mèo',
     duration: 60 * 60 // 60 phút
 };
+// ============================================================
 
-// --- QUẢN LÝ THỜI GIAN (LocalStorage để không bị reset khi load lại trang) ---
-let startTime = localStorage.getItem('sunny_timer_start_thach');
+// Đổ dữ liệu ra giao diện
+document.getElementById('mainTitle').innerText = CONFIG.courseName;
+document.getElementById('mainDesc').innerText = CONFIG.courseDesc;
+document.getElementById('heroImg').src = CONFIG.heroImg;
+document.getElementById('qrImg').src = CONFIG.qrImg;
+document.getElementById('show-price').innerText = CONFIG.priceSale;
+document.getElementById('old-price').innerText = CONFIG.priceOld;
+document.getElementById('modal-price').innerText = CONFIG.priceSale;
+document.getElementById('groupLink').href = CONFIG.teleLink;
+
+// LOGIC ĐẾM NGƯỢC
+let storageKey = 'sunny_timer_' + CONFIG.courseID;
+let startTime = localStorage.getItem(storageKey);
 if (!startTime) {
     startTime = Date.now();
-    localStorage.setItem('sunny_timer_start_thach', startTime);
+    localStorage.setItem(storageKey, startTime);
 }
 
-function updateUI(isExpired) {
-    const priceNew = document.getElementById('show-price');
-    const priceOld = document.getElementById('old-price');
-    const tag = document.getElementById('tag');
-    const mPrice = document.getElementById('modal-price');
-    const timerRow = document.querySelector('.timer-row');
-
-    if (isExpired) {
-        priceNew.innerText = "399.000đ";
-        priceOld.style.display = "none";
-        tag.style.display = "none";
-        mPrice.innerText = "399.000đ";
-        timerRow.innerHTML = "🔥 Ưu đãi đã kết thúc!";
-    }
-}
-
-function tick() {
-    const now = Date.now();
-    const elapsed = Math.floor((now - startTime) / 1000);
+function updateTimer() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
     const remaining = CONFIG.duration - elapsed;
-
     if (remaining > 0) {
         const mins = Math.floor(remaining / 60);
         const secs = remaining % 60;
         document.getElementById('timer').innerText = `${mins < 10 ? '0'+mins : mins}:${secs < 10 ? '0'+secs : secs}`;
     } else {
-        updateUI(true);
+        document.getElementById('timer-label').innerText = "🔥 Ưu đãi đã kết thúc!";
+        document.getElementById('timer').innerText = "";
+        document.getElementById('show-price').innerText = CONFIG.priceOld;
+        document.getElementById('old-price').style.display = "none";
+        document.getElementById('modal-price').innerText = CONFIG.priceOld;
         clearInterval(timerInterval);
     }
 }
+const timerInterval = setInterval(updateTimer, 1000);
+updateTimer();
 
-const timerInterval = setInterval(tick, 1000);
-tick();
-
-// --- MODAL & TELEGRAM ---
 function openModal() { document.getElementById('paymentModal').style.display = 'flex'; }
 function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
 
 document.getElementById('payForm').onsubmit = async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    const zalo = document.getElementById('zaloName').value;
-    const file = document.getElementById('bill').files[0];
     const isExpired = Math.floor((Date.now() - startTime) / 1000) >= CONFIG.duration;
-    const finalPrice = isExpired ? "399.000" : "199.000";
-
+    const finalPrice = isExpired ? CONFIG.priceOld : CONFIG.priceSale;
+    
     btn.innerText = "Đang gửi xác nhận...";
     btn.disabled = true;
 
     const fd = new FormData();
     fd.append('chat_id', CONFIG.chatId);
-    fd.append('photo', file);
-    fd.append('caption', `🔔 ĐƠN MỚI!\n📗 Khóa: ${CONFIG.courseName}\n👤 Zalo: ${zalo}\n💰 Giá mua: ${finalPrice}đ\nCheck bank ngay nhé Sunny!`);
+    fd.append('photo', document.getElementById('bill').files[0]);
+    fd.append('caption', `🔔 ĐƠN MỚI!\n📘 Khóa: ${CONFIG.courseName}\n👤 Zalo: ${document.getElementById('zaloName').value}\n💰 Giá mua: ${finalPrice}\nCheck bank nhé Sunny!`);
 
     try {
         const res = await fetch(`https://api.telegram.org/bot${CONFIG.token}/sendPhoto`, { method: 'POST', body: fd });
         if (res.ok) {
             document.getElementById('payForm').style.display = 'none';
             document.getElementById('successBox').style.display = 'block';
-        } else {
-            alert("Lỗi gửi ảnh! Bạn thử lại nhé.");
-            btn.disabled = false;
-            btn.innerText = "Xác nhận & Nhận link học";
         }
-    } catch (err) {
-        alert("Lỗi kết nối!");
-        btn.disabled = false;
-    }
+    } catch (err) { alert("Lỗi kết nối!"); btn.disabled = false; }
 };
 
-// Đóng khi click ngoài
 window.onclick = (e) => { if(e.target.id === 'paymentModal') closeModal(); }
 </script>
-
 </body>
 </html>
  
