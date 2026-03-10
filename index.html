@@ -29,32 +29,32 @@
         /* BOX THÔNG TIN NGÂN HÀNG */
         .bank-details { background: #f9f9f9; padding: 12px; border-radius: 12px; margin: 10px 0; text-align: left; font-size: 14px; border: 1px solid #eee; }
         .bank-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .bank-item:last-child { margin-bottom: 0; }
         .bank-item b { color: #222; font-size: 15px; }
         .btn-copy { background: #fff; border: 1px solid #ddd; padding: 5px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: bold; color: var(--pink); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
+        /* NÚT TẢI QR */
+        .btn-download-qr { background: #fff; color: var(--pink); border: 2px solid var(--pink); padding: 8px 15px; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; margin: 5px 0 10px 0; display: inline-block; transition: 0.3s; }
+        .btn-download-qr:hover { background: var(--pink-light); }
+
         /* BOX LƯU Ý */
-        .content-warning {
-            background: var(--warning); padding: 15px; border-radius: 12px; border: 2px solid #fab005; 
-            margin: 15px 0; text-align: left; font-size: 14px; line-height: 1.4;
-        }
+        .content-warning { background: var(--warning); padding: 15px; border-radius: 12px; border: 2px solid #fab005; margin: 15px 0; text-align: left; font-size: 14px; line-height: 1.4; }
         .content-warning b { color: #e67e22; display: block; margin-bottom: 4px; }
 
         /* BOX HƯỚNG DẪN DƯỚI Ô NHẬP NICK */
         .highlight-box { background: #fff0f3; padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed #ff5c8a; font-weight: bold; font-size: 14px; margin: 10px 0 15px 0; line-height: 1.5; text-align: left; }
 
         /* NÚT CHỌN TỆP */
-        .custom-file-upload {
-            display: block; width: 100%; padding: 16px; background: #fff; border: 2px solid #ff85a2; color: #ff5c8a;
-            border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; box-sizing: border-box; text-align: center; line-height: 1.3;
-        }
+        .custom-file-upload { display: block; width: 100%; padding: 16px; background: #fff; border: 2px solid #ff85a2; color: #ff5c8a; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; box-sizing: border-box; text-align: center; }
         #bill { display: none; }
         #file-name { display: block; margin-top: 5px; font-size: 13px; color: #2ecc71; font-weight: bold; text-align: center; }
 
         input[type="text"] { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; background: #fff; }
         .btn-send { background: #333; color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 10px; }
-        #successBox { display: none; margin-top: 20px; }
-        .btn-tele { display: inline-block; background: var(--blue-tele); color: white; padding: 15px 25px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 15px; font-size: 16px; }
+
+        /* BOX THÀNH CÔNG */
+        #successBox { display: none; margin-top: 10px; padding: 10px; }
+        .btn-tele { display: inline-block; background: var(--blue-tele); color: white; padding: 18px 25px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 5px; font-size: 18px; width: 100%; box-sizing: border-box; }
+        .success-desc { font-size: 14px; color: #555; margin-top: 15px; line-height: 1.5; background: #f0f9ff; padding: 12px; border-radius: 10px; border: 1px solid #bae7ff; text-align: left; }
     </style>
 </head>
 <body>
@@ -84,18 +84,16 @@
         <p style="margin: 5px 0;">Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 24px;">0đ</strong></p>
         
         <img id="qrImg" src="" style="width:100%; max-width:180px; border-radius:15px; border: 1px solid #eee; margin: 5px 0;">
+        
+        <button class="btn-download-qr" onclick="downloadQR()">📥 Tải mã QR về máy để quét ảnh</button>
 
         <div class="bank-details">
-            <div class="bank-item">
-                <span>Ngân hàng: <b id="bankNameDisplay"></b></span>
-            </div>
+            <div class="bank-item"><span>Ngân hàng: <b id="bankNameDisplay"></b></span></div>
             <div class="bank-item">
                 <span>STK: <b id="stkDisplay"></b></span>
                 <button class="btn-copy" onclick="copy('stkDisplay')">Copy</button>
             </div>
-            <div class="bank-item">
-                <span>Chủ TK: <b id="ownerDisplay"></b></span>
-            </div>
+            <div class="bank-item"><span>Chủ TK: <b id="ownerDisplay"></b></span></div>
             <div class="bank-item" style="border-top: 1px solid #eee; padding-top: 8px; margin-top: 5px;">
                 <span>Nội dung ck: <b>Để mặc định tên của BẠN</b></span>
             </div>
@@ -123,8 +121,11 @@
         </form>
 
         <div id="successBox">
-            <p style="font-weight:bold; color:#0d47a1; font-size: 18px;">🎉 Gửi Bill thành công!</p>
+            <p style="font-weight:bold; color:#0d47a1; font-size: 20px; margin-bottom: 15px;">🎉 Gửi Bill thành công!</p>
             <a id="groupLink" href="#" target="_blank" class="btn-tele">VÀO LỚP HỌC NGAY</a>
+            <div class="success-desc">
+                <b>Mô tả:</b> nhấn “Yêu cầu tham gia” trên Telegram để Admin duyệt vào nhóm học. Thời gian xét duyệt tối đa 24 giờ.
+            </div>
         </div>
     </div>
 </div>
@@ -162,6 +163,16 @@ document.getElementById('groupLink').href = CONFIG.teleLink;
 document.getElementById('bankNameDisplay').innerText = CONFIG.bankName;
 document.getElementById('stkDisplay').innerText = CONFIG.bankSTK;
 document.getElementById('ownerDisplay').innerText = CONFIG.bankOwner;
+
+// HÀM TẢI MÃ QR
+function downloadQR() {
+    const link = document.createElement('a');
+    link.href = CONFIG.qrImg;
+    link.download = 'QR_Thanh_Toan_Sunny.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 function showFileName(input) {
     const fileName = input.files[0] ? " ✅ Đã chọn: " + input.files[0].name : "";
