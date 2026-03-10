@@ -35,10 +35,10 @@
 
         .btn-download-qr { background: #fff; color: var(--pink); border: 2px solid var(--pink); padding: 8px 15px; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; margin: 5px 0 10px 0; display: inline-block; }
 
-        /* BOX HƯỚNG DẪN ĐIỂM NHẤN */
-        .highlight-box { background: #fff0f3; padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed #ff5c8a; font-weight: bold; font-size: 14px; margin: 15px 0; line-height: 1.5; text-align: left; }
+        /* BOX HƯỚNG DẪN */
+        .highlight-box { background: #fff0f3; padding: 15px; border-radius: 12px; color: #d63031; border: 2px dashed #ff5c8a; font-weight: bold; font-size: 14px; margin: 10px 0 15px 0; line-height: 1.5; text-align: left; }
 
-        /* NÚT TẢI FILE */
+        /* UPLOAD FILE */
         .custom-file-upload { display: block; width: 100%; padding: 16px; background: #fff; border: 2px solid #ff85a2; color: #ff5c8a; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; box-sizing: border-box; text-align: center; }
         #bill { display: none; }
         #file-name { display: block; margin-top: 5px; font-size: 13px; color: #2ecc71; font-weight: bold; text-align: center; }
@@ -96,25 +96,21 @@
 
         <form id="payForm">
             <input type="text" id="teleNick" placeholder="Nhập tên Nick Telegram của BẠN" required>
-            
             <div class="highlight-box">
                 Sau khi hoàn tất chuyển khoản thanh toán, BẠN hãy nhập tên Nick Telegram của BẠN vào ô bên trên, sau đó nhấn “Chọn tệp” để tải lên ảnh bill chuyển khoản thành công và ấn Xác nhận & nhận link học để được Admin duyệt vào lớp học.
             </div>
-
-            <label for="bill" class="custom-file-upload">
-                📁 Nhấn vào đây để Chọn tệp ảnh Bill chuyển khoản thành công
-            </label>
+            <label for="bill" class="custom-file-upload">📁 Nhấn vào đây để Chọn tệp ảnh Bill chuyển khoản thành công</label>
             <span id="file-name"></span>
             <input type="file" id="bill" accept="image/*" required onchange="showFileName(this)">
-            
             <button type="submit" id="submitBtn" class="btn-send">Xác nhận & nhận link học</button>
         </form>
 
         <div id="successBox">
             <p style="font-weight:bold; color:#0d47a1; font-size: 20px; margin-bottom: 15px;">🎉 Gửi Bill thành công!</p>
-            <a id="groupLink" href="#" target="_blank" class="btn-tele">VÀO LỚP HỌC NGAY</a>
+            <a id="groupLink" href="#" target="_blank" class="btn-tele">VÀO LỚP HỌC NGAY Ở ĐÂY</a>
+            
             <div class="success-desc">
-                Sau khi vào lớp học, nhấn “Yêu cầu tham gia” trên Telegram để Admin duyệt vào nhóm học. Thời gian xét duyệt tối đa 24 giờ.
+                <b>Lưu ý:</b> Ở cửa sổ Telegram tiếp theo, vui lòng nhấn “Yêu cầu tham gia” để gửi yêu cầu vào nhóm học. Admin sẽ tiến hành xét duyệt trong thời gian tối đa 24 giờ.
             </div>
         </div>
     </div>
