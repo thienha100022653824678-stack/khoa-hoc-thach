@@ -5,72 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bếp Bánh Sunny - Hệ Thống Khóa Học Online</title>
     <style>
-        :root { --pink: #ff5c8a; --pink-light: #ffeff1; --text: #333; }
+        :root { --pink: #ff5c8a; --pink-light: #ffeff1; --text: #333; --blue-tele: #0088cc; }
         body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         
         /* GIAO DIỆN THẺ KHÓA HỌC */
         .card { background: white; width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
-        
-        /* ẢNH BÌA */
         .hero { width: 100%; height: 260px; background: #eee; }
         .hero img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* NỘI DUNG CHI TIẾT */
         .content { padding: 25px; text-align: left; }
         h1 { font-size: 24px; color: var(--text); margin: 0 0 8px 0; }
         p.desc { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.5; min-height: 45px; }
-        
-        /* GIÁ CẢ */
         .price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
         .price-new { font-size: 34px; font-weight: 800; color: var(--text); }
         .price-old { font-size: 18px; color: #bbb; text-decoration: line-through; }
-
-        /* ĐẾM NGƯỢC */
         .timer-row { display: flex; align-items: center; gap: 8px; color: #ff2e63; margin-bottom: 25px; font-size: 16px; font-weight: 600; }
         #timer { font-weight: 800; font-size: 20px; }
-
-        /* NÚT ĐĂNG KÝ */
-        .btn-reg { 
-            background: linear-gradient(135deg, #ff85a2, #ff5c8a); 
-            color: white; border: none; width: 100%; padding: 16px; 
-            border-radius: 12px; font-size: 18px; font-weight: bold; 
-            cursor: pointer; box-shadow: 0 5px 20px rgba(255, 92, 138, 0.3); 
-        }
+        .btn-reg { background: linear-gradient(135deg, #ff85a2, #ff5c8a); color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; }
 
         /* MODAL THANH TOÁN */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-inner { background: white; width: 100%; max-width: 400px; padding: 30px; border-radius: 25px; text-align: center; position: relative; }
-        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #ccc; }
-        input[type="text"] { width: 100%; padding: 14px; margin: 15px 0; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-size: 16px; }
+        .modal-inner { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 25px; text-align: center; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close { position: absolute; top: 10px; right: 15px; font-size: 30px; cursor: pointer; color: #ccc; }
         
-        .upload-label { text-align: left; font-size: 13px; margin-bottom: 8px; color: #444; line-height: 1.4; display: block; font-weight: 500; }
-        
+        /* BOX THÔNG TIN NGÂN HÀNG */
+        .bank-details { background: #f9f9f9; padding: 12px; border-radius: 12px; margin: 10px 0; text-align: left; font-size: 14px; border: 1px solid #eee; }
+        .bank-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .bank-item b { color: #555; }
+        .btn-copy { background: #f0f0f0; border: none; padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: bold; color: var(--pink); }
+        .btn-copy:active { background: #ddd; }
+
+        /* BOX ĐIỂM NHẤN HƯỚNG DẪN */
+        .highlight-box { background: #fff0f3; padding: 12px; border-radius: 12px; color: #ff2e63; border: 1px dashed #ff2e63; font-weight: bold; font-size: 13px; margin: 15px 0; line-height: 1.4; text-align: left; }
+
+        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
         .btn-send { background: #333; color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
         #successBox { display: none; margin-top: 20px; }
-        .btn-tele { display: inline-block; background: #0088cc; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+        .btn-tele { display: inline-block; background: var(--blue-tele); color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="hero">
-        <img id="heroImg" src="" alt="Course Image">
-    </div>
+    <div class="hero"><img id="heroImg" src="" alt="Course Image"></div>
     <div class="content">
         <h1 id="mainTitle">Loading...</h1>
         <p class="desc" id="mainDesc">Loading...</p>
-        
         <div class="price-row">
             <span class="price-new" id="show-price">0đ</span>
             <span class="price-old" id="old-price">0đ</span>
         </div>
-
         <div class="timer-row">
             <span style="font-size: 20px;">⏱</span>
             <span id="timer-label">Ưu đãi chỉ còn:</span>
             <span id="timer">60:00</span>
         </div>
-
         <button class="btn-reg" onclick="openModal()">Đăng ký ngay</button>
     </div>
 </div>
@@ -78,22 +66,35 @@
 <div id="paymentModal" class="modal">
     <div class="modal-inner">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h3 style="margin: 0 0 10px 0;">Thanh toán khóa học</h3>
-        <p>Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 22px;">0đ</strong></p>
-        <img id="qrImg" src="" style="width:100%; max-width:240px; border-radius:15px; margin: 10px 0; border: 1px solid #eee;">
+        <h3 style="margin: 0 0 5px 0;">Thanh toán khóa học</h3>
+        <p style="margin: 5px 0;">Số tiền: <strong id="modal-price" style="color: #ff2e63; font-size: 22px;">0đ</strong></p>
         
-        <p style="font-size:12px; background:#fff0f3; padding:10px; border-radius:10px; color:#ff2e63; border:1px dashed #ff2e63; font-weight:bold;">
-            Nội dung CK: tên Nick Telegram của BẠN
-        </p>
+        <img id="qrImg" src="" style="width:100%; max-width:200px; border-radius:15px; border: 1px solid #eee; margin: 5px 0;">
+
+        <div class="bank-details">
+            <div class="bank-item">
+                <span>Ngân hàng: <b id="bankNameDisplay"></b></span>
+                <button class="btn-copy" onclick="copy('bankNameDisplay')">📋 Copy</button>
+            </div>
+            <div class="bank-item">
+                <span>STK: <b id="stkDisplay"></b></span>
+                <button class="btn-copy" onclick="copy('stkDisplay')">📋 Copy</button>
+            </div>
+            <div class="bank-item">
+                <span>Chủ TK: <b id="ownerDisplay"></b></span>
+                <button class="btn-copy" onclick="copy('ownerDisplay')">📋 Copy</button>
+            </div>
+        </div>
+
+        <p style="font-size:12px; font-weight:bold; margin-bottom: 0;">Nội dung CK: tên Nick Telegram của BẠN</p>
         
+        <div class="highlight-box">
+            Sau khi hoàn tất chuyển khoản thanh toán, vui lòng nhấn “Chọn tệp” bên dưới để tải lên ảnh bill chuyển khoản thành công, sau đó gửi cho Admin để được cấp link truy cập khóa học
+        </div>
+
         <form id="payForm">
             <input type="text" id="teleNick" placeholder="Nhập tên Nick Telegram của BẠN" required>
-            
-            <label class="upload-label">
-                Vui lòng ấn vào "Chọn tệp" bên dưới để tải ảnh Bill chuyển khoản thành công gửi cho Admin để nhận link khóa học:
-            </label>
-            <input type="file" id="bill" accept="image/*" required style="width:100%; margin-bottom:15px;">
-            
+            <input type="file" id="bill" accept="image/*" required style="width:100%; margin-bottom:10px;">
             <button type="submit" id="submitBtn" class="btn-send">Xác nhận & Nhận link học</button>
         </form>
 
@@ -106,7 +107,7 @@
 
 <script>
 // ============================================================
-// CẤU HÌNH CỦA SUNNY
+// CẤU HÌNH CỦA BẠN (SỬA Ở ĐÂY)
 const CONFIG = {
     courseID: 'thach_chan_meo_01',
     courseName: 'Khóa học Thạch Chân Mèo',
@@ -116,13 +117,19 @@ const CONFIG = {
     priceSale: '199.000đ',
     priceOld: '399.000đ',
     teleLink: 'https://t.me/+6tr9ueF0hyUxNTJl',
+
+    // Thông tin ngân hàng tùy biến
+    bankName: 'MB Bank',
+    bankSTK: '8877848800613',
+    bankOwner: 'LUU THI HOA',
     
     token: '8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk',
     chatId: '6699534762',
-    duration: 60 * 60 // 60 phút
+    duration: 60 * 60 
 };
 // ============================================================
 
+// Đổ dữ liệu ra UI
 document.getElementById('mainTitle').innerText = CONFIG.courseName;
 document.getElementById('mainDesc').innerText = CONFIG.courseDesc;
 document.getElementById('heroImg').src = CONFIG.heroImg;
@@ -132,6 +139,20 @@ document.getElementById('old-price').innerText = CONFIG.priceOld;
 document.getElementById('modal-price').innerText = CONFIG.priceSale;
 document.getElementById('groupLink').href = CONFIG.teleLink;
 
+// Đổ dữ liệu ngân hàng
+document.getElementById('bankNameDisplay').innerText = CONFIG.bankName;
+document.getElementById('stkDisplay').innerText = CONFIG.bankSTK;
+document.getElementById('ownerDisplay').innerText = CONFIG.bankOwner;
+
+// Hàm Copy
+function copy(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Đã copy: " + text);
+    });
+}
+
+// Logic Đếm ngược
 let storageKey = 'sunny_timer_' + CONFIG.courseID;
 let startTime = localStorage.getItem(storageKey);
 if (!startTime) {
@@ -166,15 +187,12 @@ document.getElementById('payForm').onsubmit = async (e) => {
     const btn = document.getElementById('submitBtn');
     const isExpired = Math.floor((Date.now() - startTime) / 1000) >= CONFIG.duration;
     const finalPrice = isExpired ? CONFIG.priceOld : CONFIG.priceSale;
-    
     btn.innerText = "Đang gửi xác nhận...";
     btn.disabled = true;
-
     const fd = new FormData();
     fd.append('chat_id', CONFIG.chatId);
     fd.append('photo', document.getElementById('bill').files[0]);
     fd.append('caption', `🔔 ĐƠN MỚI!\n📘 Khóa: ${CONFIG.courseName}\n👤 Nick Telegram: ${document.getElementById('teleNick').value}\n💰 Giá mua: ${finalPrice}\nCheck bank nhé Sunny!`);
-
     try {
         const res = await fetch(`https://api.telegram.org/bot${CONFIG.token}/sendPhoto`, { method: 'POST', body: fd });
         if (res.ok) {
@@ -183,7 +201,6 @@ document.getElementById('payForm').onsubmit = async (e) => {
         }
     } catch (err) { alert("Lỗi kết nối!"); btn.disabled = false; }
 };
-
 window.onclick = (e) => { if(e.target.id === 'paymentModal') closeModal(); }
 </script>
 </body>
