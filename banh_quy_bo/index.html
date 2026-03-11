@@ -59,14 +59,13 @@
     </div>
 
     <script>
-        // SỬ DỤNG FORMAT ISO CHUẨN ĐỂ HIỂU NGÀY THÁNG
-        const end = new Date("2026-03-11T10:14:00").getTime();
+        // Lấy con số chính xác 100% được dịch từ Google Apps Script
+        const end = 1773213000000; 
         
         setInterval(() => {
             const diff = end - new Date().getTime();
             if(diff <= 0) { document.querySelector('.timer-box').innerText = "Ưu đãi đã kết thúc!"; return; }
             
-            // Tính toán tổng số giờ (thay vì chỉ lấy số giờ trong 1 ngày)
             const h = Math.floor(diff / (1000 * 60 * 60)); 
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); 
             const s = Math.floor((diff % (1000 * 60)) / 1000);
