@@ -1,7 +1,6 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Khóa học Tôm Chiên</title>
   <style>
-    /* CSS Giữ nguyên giao diện của bạn */
-    *{box-sizing:border-box;}:root{--pink:#ff5c8a;--bg:#e9e9e9;}body{font-family:'Segoe UI',sans-serif;background:var(--bg);display:flex;justify-content:center;padding:20px;margin:0;color:#333;}.card{background:white;width:100%;max-width:480px;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.12);}.hero img{width:100%;height:260px;object-fit:cover;}.content{padding:30px;text-align:center;}h1{margin:0 0 10px 0;font-size:24px;font-weight:800;}.desc{color:#666;font-size:15px;margin-bottom:25px;line-height:1.5;}.price-row{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:20px;}.price-new{font-size:34px;font-weight:900;color:var(--pink);}.price-old{text-decoration:line-through;color:#bbb;font-size:18px;}.timer-box{background:#fff9db;padding:12px;border-radius:12px;color:#ff2e63;font-weight:bold;margin-bottom:25px;font-size:16px;border:1px solid #ffeeba;}.details-box{text-align:left;border-top:1px solid #eee;padding-top:25px;margin-bottom:30px;white-space:pre-wrap;line-height:1.7;font-size:15px;color:#444;}.btn-reg{background:var(--pink);color:white;border:none;width:100%;padding:20px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:20px;}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:15px;}.modal-inner{background:white;width:100%;max-width:400px;border-radius:25px;padding:30px;text-align:center;position:relative;max-height:90vh;overflow-y:auto;}.bank-box{background:#f8f9fa;padding:18px;border-radius:15px;text-align:left;font-size:15px;margin:20px 0;border:1px solid #eee;}.btn-copy{background:#fff;color:var(--pink);border:1px solid var(--pink);padding:5px 12px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;}.notice{background:#fff5f7;padding:15px;border-radius:12px;color:#d63031;border:1px dashed var(--pink);font-size:14px;margin:15px 0;text-align:left;line-height:1.5;font-weight:600;}.input-nick{width:100%;padding:18px;margin-bottom:20px;border:1px solid #eee;border-radius:12px;font-size:16px;text-align:center;}.btn-sub{background:#333;color:white;border:none;width:100%;padding:20px;border-radius:15px;font-weight:bold;font-size:18px;cursor:pointer;width:100%;}.btn-sub:disabled{background:#ccc;cursor:not-allowed;}
+    *{box-sizing:border-box;}:root{--pink:#ff5c8a;--bg:#e9e9e9;}body{font-family:'Segoe UI',sans-serif;background:var(--bg);display:flex;justify-content:center;padding:20px;margin:0;color:#333;}.card{background:white;width:100%;max-width:480px;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.12);}.hero img{width:100%;height:260px;object-fit:cover;}.content{padding:30px;text-align:center;}h1{margin:0 0 10px 0;font-size:24px;font-weight:800;}.desc{color:#666;font-size:15px;margin-bottom:25px;line-height:1.5;}.price-row{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:20px;}.price-new{font-size:34px;font-weight:900;color:var(--pink);}.price-old{text-decoration:line-through;color:#bbb;font-size:18px;}.timer-box{background:#fff9db;padding:12px;border-radius:12px;color:#ff2e63;font-weight:bold;margin-bottom:25px;font-size:16px;border:1px solid #ffeeba;}.details-box{text-align:left;border-top:1px solid #eee;padding-top:25px;margin-bottom:30px;white-space:pre-wrap;line-height:1.7;font-size:15px;color:#444;}.btn-reg{background:var(--pink);color:white;border:none;width:100%;padding:20px;border-radius:15px;font-weight:bold;cursor:pointer;font-size:20px;}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:15px;}.modal-inner{background:white;width:100%;max-width:400px;border-radius:25px;padding:30px;text-align:center;position:relative;max-height:90vh;overflow-y:auto;}.bank-box{background:#f8f9fa;padding:18px;border-radius:15px;text-align:left;font-size:15px;margin:20px 0;border:1px solid #eee;}.btn-copy{background:#fff;color:var(--pink);border:1px solid var(--pink);padding:5px 12px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;}.input-nick{width:100%;padding:18px;margin-bottom:20px;border:1px solid #eee;border-radius:12px;font-size:16px;text-align:center;}.btn-sub{background:#333;color:white;border:none;width:100%;padding:20px;border-radius:15px;font-weight:bold;font-size:18px;cursor:pointer;width:100%;}.btn-sub:disabled{background:#ccc;cursor:not-allowed;}
   </style>
   </head><body>
     <div class="card">
@@ -57,70 +56,33 @@ Vị béo bùi hài hòa, ăn nhiều vẫn không ngán.</div>
       </div>
     </div>
     <script>
-      let sending = false; // LỚP 1: Chặn bấm nhiều lần
-
+      let sending = false; 
       async function sendBill(){
         const n=document.getElementById('nick').value, file=document.getElementById('f').files[0];
-        if(!n||!file) return alert("Thiếu thông tin!");
-        
-        if(sending) return alert("Hệ thống đang xử lý, vui lòng không bấm liên tục!");
+        if(!n||!file) return alert("Vui lòng nhập Nick và ảnh Bill!");
+        if(sending) return alert("Vui lòng chờ giây lát...");
         sending = true;
-
-        const btn=document.getElementById('btnSub'); 
-        btn.disabled=true; 
-        btn.innerText="Đang xử lý...";
-
+        const btn=document.getElementById('btnSub'); btn.disabled=true; btn.innerText="Đang xử lý...";
         const reader=new FileReader(); reader.readAsDataURL(file);
         reader.onload=async()=>{
           const base64=reader.result.split(',')[1];
           try {
-            const res=await fetch('https://script.google.com/macros/s/AKfycbxnZIRbcHx0e1BuV8lagV1bVTz1D3WgoUbDF3JbgMtAcGeQBjY/exec',{
-               method:'POST',
-               body:JSON.stringify({
-                 action:'record_sale',
-                 nick:n,
-                 courseID:'tom_chien',
-                 courseName:'Khóa học Tôm Chiên',
-                 price:'199.000đ',
-                 fileBase64:base64,
-                 fileType:file.type
-               })
-            });
+            const res=await fetch('https://script.google.com/macros/s/AKfycbxnZIRbcHx0e1BuV8lagV1bVTz1D3WgoUbDF3JbgMtAcGeQBjY/exec',{method:'POST',body:JSON.stringify({action:'record_sale',nick:n,courseID:'tom_chien',courseName:'Khóa học Tôm Chiên',price:'199.000đ',fileBase64:base64,fileType:file.type})});
             const out=await res.text();
-
-            if(out === "OK"){ 
-               document.getElementById('f-box').style.display='none'; 
-               document.getElementById('s-box').style.display='block'; 
-            } else if(out === "SPAM_BLOCKED") {
-               alert("⚠️ LỚP 3: Nick của bạn đã gửi đơn trong 2 phút qua. Vui lòng đợi!");
-               resetBtn();
-            } else { 
-               alert("Có lỗi xảy ra, thử lại!"); 
-               resetBtn();
-            }
+            if(out==='OK'){ document.getElementById('f-box').style.display='none'; document.getElementById('s-box').style.display='block'; }
+            else { alert(out === "SPAM_BLOCKED" ? "⚠️ Bạn vừa gửi đơn, vui lòng đợi 2 phút!" : "Lỗi hệ thống!"); resetBtn(); }
           } catch(e){ alert("Lỗi kết nối!"); resetBtn(); }
         };
       }
-
       function resetBtn() {
-        // LỚP 2: Khóa gửi lại trong 30 giây (đếm ngược nhẹ)
-        const btn=document.getElementById('btnSub');
-        let count = 30;
+        const btn=document.getElementById('btnSub'); let count = 30;
         const timer = setInterval(() => {
-          btn.innerText = "Chờ " + count + "s...";
-          count--;
-          if(count < 0) {
-            clearInterval(timer);
-            sending = false;
-            btn.disabled = false;
-            btn.innerText = "Xác nhận";
-          }
+          btn.innerText = "Chờ " + count + "s..."; count--;
+          if(count < 0) { clearInterval(timer); sending = false; btn.disabled = false; btn.innerText = "Xác nhận"; }
         }, 1000);
       }
-
-      // Đếm ngược thời gian Sale
-      function parseDate(s){const p=s.split('/');return new Date(p[4],p[3]-1,p[2],p[0],p[1]).getTime();}
-      const end=parseDate("12/15/11/03/2026");
+      function pD(s){const p=s.split('/');return new Date(p[4],p[3]-1,p[2],p[0],p[1]).getTime();}
+      const end=pD("12/15/11/03/2026");
       setInterval(()=>{
         const diff=end-new Date().getTime();
         if(diff<=0){if(document.getElementById('s-b'))document.getElementById('s-b').style.display='none';return;}
