@@ -59,8 +59,15 @@
     </div>
 
     <script>
-        // Lấy con số chính xác 100% được dịch từ Google Apps Script
-        const end = 1773213000000; 
+        // --- EVERGREEN TIMER: Đếm ngược 60 phút ---
+        const CID = "banh_quy_bo";
+        let end = localStorage.getItem('end_' + CID);
+        
+        // Nếu khách mới vào lần đầu, hoặc thời gian lưu đã quá hạn -> Cấp lại 60 phút
+        if (!end || end < new Date().getTime()) {
+            end = new Date().getTime() + 60 * 60 * 1000; // 60 phút = 60 * 60 * 1000 ms
+            localStorage.setItem('end_' + CID, end);
+        }
         
         setInterval(() => {
             const diff = end - new Date().getTime();
