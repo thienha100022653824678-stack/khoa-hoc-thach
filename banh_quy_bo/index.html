@@ -1,1 +1,73 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Khóa học Bánh Quy Bơ</title><style>body{-webkit-user-select:none;user-select:none;font-family:sans-serif;background:#fdf2f5;margin:0;display:flex;justify-content:center;padding:20px}.c{background:#fff;max-width:450px;width:100%;border-radius:25px;box-shadow:0 10px 40px rgba(0,0,0,0.1);overflow:hidden;text-align:center}canvas{max-width:90%;height:auto;margin:15px 0} .b{background:#ff5c8a;color:#fff;border:none;padding:18px;width:90%;border-radius:12px;font-weight:700;cursor:pointer;margin-bottom:20px}</style></head><body oncontextmenu="return false"><div id="ld">⌛ Checking security...</div><div class="c" id="app" style="display:none"><img src="/Images/banhquy.jpg" style="width:100%"><div style="padding:20px"><h2>Khóa học Bánh Quy Bơ</h2><canvas id="mc"></canvas><h3 style="color:#ff5c8a">199.000đ</h3><img src="/Images/qr-thanh-toan.jpg" style="width:200px"><hr><p><b>XÁC NHẬN THANH TOÁN</b></p><input type="text" id="n" placeholder="Nick Telegram" style="width:80%;padding:12px;margin-bottom:10px;border:1px solid #eee;border-radius:8px"><input type="file" id="f" accept="image/*" style="width:80%;margin-bottom:10px"><button class="b" id="s" onclick="sd()">GỬI BILL</button></div></div><script>if(location.hostname !== "yeunauan.live" && location.hostname !== "www.yeunauan.live"){document.body.innerHTML="";}const fp = btoa(navigator.userAgent + screen.width + screen.height + navigator.language).slice(0,32);window.onload = function(){  fetch("https://script.google.com/macros/s/AKfycbzrUsbpV5bhHurihdflGGiyXWnNkNyOCSDr5AFeGhcVBkhp3qDE6MN6WPqmFNR7OHGD/exec",{method:"POST",body:JSON.stringify({action:"get_toc",id:"banh_quy_bo",fp:fp})})  .then(r=>r.json()).then(res=>{    if(res.stt==="ok"){      document.getElementById("ld").style.display="none"; document.getElementById("app").style.display="block";      let d=atob(res.data); let cv=document.getElementById("mc"); let ctx=cv.getContext("2d"); let l=d.split("\n");      cv.width=400; cv.height=l.length*28+40; ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height); ctx.fillStyle="#444"; ctx.font="16px Arial";      l.forEach((t,i)=>ctx.fillText(t,15,35+i*28));    }  });};function sd(){  let nick=document.getElementById("n").value; let file=document.getElementById("f").files[0]; if(!nick||!file) return alert("Điền đủ thông tin!");  if(!file.type.startsWith("image/")) return alert("Chỉ gửi ảnh!");  document.getElementById("s").innerText="⌛ Sending..."; document.getElementById("s").disabled=true;  let r=new FileReader(); r.readAsDataURL(file); r.onload=function(){    fetch("https://script.google.com/macros/s/AKfycbzrUsbpV5bhHurihdflGGiyXWnNkNyOCSDr5AFeGhcVBkhp3qDE6MN6WPqmFNR7OHGD/exec",{method:"POST",body:JSON.stringify({action:"up_bill",nick:nick,course:"Khóa học Bánh Quy Bơ",img:r.result,fp:fp})})    .then(res=>res.json()).then(o=>{ if(o.stt==="ok") alert("✅ Đã gửi!"); location.reload(); });  };}</script></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Khóa học Bánh Quy Bơ</title><style>body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;font-family:sans-serif;background:#f0f0f0;margin:0;display:flex;justify-content:center;padding:20px}.c{background:#fff;max-width:450px;width:100%;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.1);overflow:hidden}.h img{width:100%;height:250px;object-fit:cover}.p{padding:25px;text-align:center}.b{background:#ff5c8a;color:#fff;border:none;padding:18px;width:100%;border-radius:12px;font-weight:700;cursor:pointer;font-size:18px}</style></head><body oncontextmenu="return false" onkeydown="return (event.keyCode!=123)"><div class="c"><div class="h"><img src="/Images/banhquy.jpg"></div><div class="p"><h1>Khóa học Bánh Quy Bơ</h1><p>Tự tay làm bánh quy bơ thơm lừng tại nhà!</p><h2 style="color:#ff5c8a">199.000đ</h2><div style="text-align:left;border-top:1px solid #eee;padding-top:20px;margin-bottom:20px;white-space:pre-wrap;">📚 DANH SÁCH NỘI DUNG KHÓA HỌC
+
+HƯỚNG DẪN 1  
+Nguyên liệu chính
+
+HƯỚNG DẪN 2  
+Các bước chuẩn bị trước khi làm
+
+HƯỚNG DẪN 3  
+Kẹo dẻo Nougat mật ong hạt dinh dưỡng
+
+HƯỚNG DẪN 4  
+Kẹo Caramel sữa dừa hạnh nhân  
+(Kẹo dẻo caramel Đài Loan)
+
+HƯỚNG DẪN 5  
+Kẹo Nougat Socola
+
+HƯỚNG DẪN 6  
+Kẹo Nougat trái cây  
+Cách sử dụng bột lòng trắng – Phương pháp tính độ ẩm
+
+HƯỚNG DẪN 7  
+Kẹo Nougat trà sữa đường đen
+
+HƯỚNG DẪN 8  
+Kẹo Nougat hạt cao cấp  
+(Công thức quan trọng – từ lòng trắng tươi)
+
+HƯỚNG DẪN 9  
+Kẹo Nougat Oreo
+
+HƯỚNG DẪN 10  
+Kẹo Nougat vị trà xanh
+
+HƯỚNG DẪN 11  
+Bánh bông tuyết ngọt
+
+HƯỚNG DẪN 12  
+CT kẹo hạt quả ngũ cốc  
+(Bột lòng trắng trứng)
+
+HƯỚNG DẪN 13  
+CT kẹo hạt quả ngũ cốc  
+(Lòng trắng tươi)
+
+HƯỚNG DẪN 14  
+Nougat vị trà xanh
+
+HƯỚNG DẪN 15  
+Kẹo Nougat vị Red Velvet – Nhung đỏ
+
+HƯỚNG DẪN 16  
+CT kẹo Nougat vị Tiramisu
+
+HƯỚNG DẪN 17  
+Bánh bông tuyết chà bông trứng muối rong biển
+
+HƯỚNG DẪN 18  
+Bánh quy kẹp sữa
+
+HƯỚNG DẪN 19  
+Kẹo / bánh gạo lứt rong biển
+
+HƯỚNG DẪN 20  
+Kẹo / bánh chà bông trứng muối gạo lứt
+
+HƯỚNG DẪN 21  
+Kẹo dẻo trái cây Đài Loan
+
+HƯỚNG DẪN 22  
+Công thức kẹo Nougat / bánh bông tuyết từ Marshmallow
+</div><button class="b" onclick="reg()">Đăng ký ngay</button></div></div><script>(function(){if(window.location.hostname!=="yeunauan.live"){document.body.innerHTML="<h1>Access Denied</h1>";}})();setInterval(function(){(function(){(function(){return false})["constructor"]("debugger")["call"]("action")})()},50);function reg(){let n=prompt("Nhập Nick Telegram của BẠN:");if(!n)return;alert("Chào "+n+"! Hệ thống đang ghi nhận...");fetch("https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec",{method:"POST",mode:"no-cors",body:JSON.stringify({action:"record_sale",nick:n,courseID:"banh_quy_bo",price:"199.000đ"})});window.location.href="https://t.me/+6tr9ueF0hyUxNTJl";}</script></body></html>
