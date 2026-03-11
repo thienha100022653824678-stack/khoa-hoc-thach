@@ -76,7 +76,7 @@
             document.querySelector('.btn-sub').innerText="Đang gửi...";
             const fd=new FormData(); fd.append('chat_id','6699534762'); fd.append('photo',file); fd.append('caption','🔔 ĐƠN MỚI!\n📗 Khóa: Khóa học Bánh Quy Bơ\n👤 Nick: '+n);
             await fetch('https://api.telegram.org/bot8603037788:AAEJgoK5Zos3Ta610NHubuQRI8Uh1W5dzNk/sendPhoto',{method:'POST',body:fd});
-            fetch('https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({action:'record_sale',nick:n,courseID:'banh_quy_bo',price:'199.000đ'})});
+            fetch('https://script.google.com/macros/s/AKfycbyS4fYyVtWh0GnGsGD7ncZvifDmuNU0vC1ko7ofW0GNqVOkBQS3W3WYgbc87atmLuuZ/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({action:'record_sale',nick:n,courseID:'banh_quy_bo',price:'199.000đ'})});
             document.getElementById('f-box').style.display='none'; document.getElementById('s-box').style.display='block';
         }
     </script>
