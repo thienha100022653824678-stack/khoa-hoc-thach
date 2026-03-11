@@ -48,7 +48,7 @@
     };
     function sd(){
       const n=document.getElementById('nick').value, f=document.getElementById('f').files[0], b=document.getElementById('sbtn');
-      if(!n||!f) return alert("Điền đủ thông tin!");
+      if(!n||!f) return alert("Vui lòng điền đủ thông tin!");
       b.innerText="⌛ Đang gửi..."; b.disabled=true;
       const r=new FileReader(); r.readAsDataURL(f);
       r.onload=() => {
