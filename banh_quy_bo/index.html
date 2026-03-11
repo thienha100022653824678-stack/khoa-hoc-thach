@@ -16,13 +16,13 @@
   </style></head><body>
   <div class="card"><div class="hero"><img src="/Images/banhquy.jpg"></div><div class="content">
     <h1>Khóa học Bánh Quy Bơ</h1><p class="desc">Tự tay làm bánh quy bơ thơm lừng tại nhà!</p>
-    <div class="price-row"><span class="p-new" id="price">199.000đ</span><span class="p-old" id="old">399.000đ</span></div>
+    <div class="price-row"><span class="p-new" id="price">299.000đ</span><span class="p-old" id="old">399.000đ</span></div>
     <div class="timer" id="t-box">Sale kết thúc sau: ⏱ <span id="time">...</span></div>
     <button class="btn" onclick="document.getElementById('m').style.display='flex'">ĐĂNG KÝ NGAY</button>
   </div></div>
   <div id="m" class="modal"><div class="m-inner">
     <span style="position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#888" onclick="document.getElementById('m').style.display='none'">&times;</span>
-    <h2 style="margin-top:0">Thanh toán</h2><h2 style="color:var(--pink);margin:10px 0">199.000đ</h2>
+    <h2 style="margin-top:0">Thanh toán</h2><h2 style="color:var(--pink);margin:10px 0">299.000đ</h2>
     <img src="/Images/qr-thanh-toan.jpg" style="width:180px;border-radius:15px">
     <div class="bank-box"><p>Ngân hàng: <b>MB Bank</b></p><p>STK: <b>8877848800613</b></p><p>Chủ TK: <b>LUU THI HOA</b></p></div>
     <div id="form-sec">
@@ -37,7 +37,7 @@
     </div>
   </div></div>
   <script>
-    const end = 1773216360463;
+    const end = 1773219527404;
     setInterval(() => {
       const d = end - Date.now();
       if(d <= 0){ 
@@ -53,7 +53,7 @@
       b.innerText="⌛ Đang gửi..."; b.disabled=true;
       const r=new FileReader(); r.readAsDataURL(f);
       r.onload=()=>{
-        fetch("https://script.google.com/macros/s/AKfycbzGjWehqsANNfj8c95Mk8fHGpNYnzsh42eifqpizWr8Y0woIkr_AVfteS6omFxt-Q-H/exec", { method:"POST", body:JSON.stringify({action:"up_bill", nick:n, courseID:"banh_quy_bo", courseName:"Khóa học Bánh Quy Bơ", price:"199.000đ", img:r.result}) })
+        fetch("https://script.google.com/macros/s/AKfycbzGjWehqsANNfj8c95Mk8fHGpNYnzsh42eifqpizWr8Y0woIkr_AVfteS6omFxt-Q-H/exec", { method:"POST", body:JSON.stringify({action:"up_bill", nick:n, courseID:"banh_quy_bo", courseName:"Khóa học Bánh Quy Bơ", price:"299.000đ", img:r.result}) })
         .then(res=>res.json()).then(o=>{
           if(o.stt==="ok"){ document.getElementById('form-sec').style.display='none'; document.getElementById('done-sec').style.display='block'; }
           else { alert("Lỗi hệ thống!"); b.innerText="GỬI XÁC NHẬN"; b.disabled=false; }
