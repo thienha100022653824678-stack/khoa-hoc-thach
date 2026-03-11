@@ -2,8 +2,9 @@
   <style>
     :root{--pink:#ff5c8a;--bg:#f8f9fa} body{font-family:'Segoe UI',sans-serif;background:var(--bg);display:flex;justify-content:center;padding:15px;margin:0;color:#333}
     .card{background:#fff;width:100%;max-width:450px;border-radius:20px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08)}
-    .hero img{width:100%;height:250px;object-fit:cover} .content{padding:25px;text-align:center}
-    h1{margin:0 0 10px 0;font-size:24px;font-weight:800} .desc{color:#666;font-size:15px;line-height:1.5;margin-bottom:20px}
+    .hero{position:relative} .hero img{width:100%;height:250px;object-fit:cover} 
+    .badge{position:absolute;top:15px;left:15px;background:var(--pink);color:white;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:bold;letter-spacing:1px;box-shadow:0 2px 10px rgba(255,92,138,0.4)}
+    .content{padding:25px;text-align:center} h1{margin:0 0 10px 0;font-size:24px;font-weight:800} .desc{color:#666;font-size:15px;line-height:1.5;margin-bottom:20px}
     .price-row{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:15px}
     .p-new{font-size:32px;font-weight:900;color:var(--pink)} .p-old{text-decoration:line-through;color:#aaa;font-size:18px}
     .timer{background:#fff0f3;padding:12px;border-radius:12px;color:#e63946;font-weight:bold;margin-bottom:20px;border:1px dashed #ffb3c6}
@@ -14,12 +15,15 @@
     input{width:100%;padding:15px;margin-bottom:15px;border:1px solid #ddd;border-radius:10px;font-size:15px;box-sizing:border-box;outline:none}
     .notice{background:#fff3cd;color:#856404;padding:12px;border-radius:10px;font-size:13px;margin-bottom:15px;text-align:left}
   </style></head><body>
-  <div class="card"><div class="hero"><img src="/Images/banhquy.jpg"></div><div class="content">
-    <h1>Khóa học Bánh Quy Bơ</h1><p class="desc">Tự tay làm bánh quy bơ thơm lừng tại nhà!</p>
-    <div class="price-row"><span class="p-new" id="price">299.000đ</span><span class="p-old" id="old">399.000đ</span></div>
-    <div class="timer" id="t-box">Sale kết thúc sau: ⏱ <span id="time">...</span></div>
-    <button class="btn" onclick="document.getElementById('m').style.display='flex'">ĐĂNG KÝ NGAY</button>
-  </div></div>
+  <div class="card">
+    <div class="hero"><span class="badge">SALE SỐC</span><img src="/Images/banhquy.jpg"></div>
+    <div class="content">
+      <h1>Khóa học Bánh Quy Bơ</h1><p class="desc">Tự tay làm bánh quy bơ thơm lừng tại nhà!</p>
+      <div class="price-row"><span class="p-new" id="price">299.000đ</span><span class="p-old" id="old">399.000đ</span></div>
+      <div class="timer" id="t-box">Sale kết thúc sau: ⏱ <span id="time">...</span></div>
+      <button class="btn" onclick="document.getElementById('m').style.display='flex'">ĐĂNG KÝ NGAY</button>
+    </div>
+  </div>
   <div id="m" class="modal"><div class="m-inner">
     <span style="position:absolute;top:10px;right:15px;font-size:28px;cursor:pointer;color:#888" onclick="document.getElementById('m').style.display='none'">&times;</span>
     <h2 style="margin-top:0">Thanh toán</h2><h2 style="color:var(--pink);margin:10px 0">299.000đ</h2>
@@ -37,7 +41,14 @@
     </div>
   </div></div>
   <script>
-    const end = 1773219527404;
+    // Cơ chế Đếm ngược 60 phút ghi nhớ theo trình duyệt của KHÁCH
+    const cid = "banh_quy_bo";
+    let end = localStorage.getItem('end_c_' + cid);
+    if (!end || end < Date.now()) {
+      end = Date.now() + (60 * 60 * 1000); // Cấp mới 60 phút
+      localStorage.setItem('end_c_' + cid, end);
+    }
+    
     setInterval(() => {
       const d = end - Date.now();
       if(d <= 0){ 
@@ -47,6 +58,7 @@
       const h=Math.floor(d/3600000), m=Math.floor((d%3600000)/60000), s=Math.floor((d%60000)/1000);
       document.getElementById('time').innerText=(h<10?'0'+h:h)+":"+(m<10?'0'+m:m)+":"+(s<10?'0'+s:s);
     }, 1000);
+
     function sd(){
       const n=document.getElementById('n').value, f=document.getElementById('f').files[0], b=document.getElementById('s-btn');
       if(!n||!f) return alert("Vui lòng điền Nick và chọn ảnh!");
