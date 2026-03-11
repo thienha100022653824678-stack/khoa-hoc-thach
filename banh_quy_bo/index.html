@@ -1,10 +1,10 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Khóa học Bánh Quy Bơ</title><style>
-    body{font-family:sans-serif;background:#fff5f7;margin:0;padding:20px;display:flex;justify-content:center}
+    body{font-family:sans-serif;background:#fff5f7;margin:0;padding:20px;display:flex;justify-content:center;-webkit-user-select:none;user-select:none}
     .card{background:white;max-width:480px;width:100%;border-radius:25px;box-shadow:0 10px 30px rgba(0,0,0,.1);overflow:hidden;text-align:center}
     .content{padding:25px} .price{color:#ff5c8a;font-size:32px;font-weight:900}
-    .details{text-align:left;background:#fdfdfd;padding:15px;border-radius:15px;border:1px solid #eee;white-space:pre-wrap;margin:15px 0}
-    canvas{width:100%;background:#fff;border-radius:10px}
+    canvas{width:100%;background:#fff;border-radius:12px;margin-top:10px}
+    input{width:100%;padding:15px;margin:10px 0;border:1px solid #eee;border-radius:12px;box-sizing:border-box}
     button{background:#ff5c8a;color:white;border:none;padding:18px;width:100%;border-radius:15px;font-weight:bold;cursor:pointer;font-size:18px}
   </style></head><body>
   <div class="card">
@@ -13,42 +13,46 @@
       <h1>Khóa học Bánh Quy Bơ</h1>
       <p style="color:#666">Tự tay làm bánh quy bơ thơm lừng tại nhà!</p>
       <div class="price">199.000đ</div>
-      <div class="details"><b>Chương trình học:</b>
-<canvas id="mc"></canvas></div>
-      <img src="/Images/qr-thanh-toan.jpg" style="width:200px;border-radius:15px;margin-bottom:15px">
+      <hr><p><b>Nội dung chương trình:</b></p>
+      <canvas id="mc"></canvas>
+      <img src="/Images/qr-thanh-toan.jpg" style="width:200px;border-radius:15px;margin:20px 0">
       <button onclick="document.getElementById('m').style.display='flex'">ĐĂNG KÝ NGAY</button>
     </div>
   </div>
   <div id="m" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;padding:20px;z-index:100">
     <div style="background:white;padding:30px;border-radius:25px;width:100%;max-width:400px;text-align:center;position:relative">
       <span style="position:absolute;top:15px;right:20px;font-size:30px;cursor:pointer" onclick="document.getElementById('m').style.display='none'">&times;</span>
-      <h3>Xác nhận Bill</h3>
-      <input id="nick" style="width:100%;padding:15px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px" placeholder="Nick Telegram">
-      <input type="file" id="f" accept="image/*" style="margin-bottom:15px">
-      <button id="sbtn" onclick="sendBill()">XÁC NHẬN GỬI</button>
+      <h3>Xác nhận thanh toán</h3>
+      <input id="nick" placeholder="Nick Telegram">
+      <input type="file" id="f" accept="image/*">
+      <button id="sbtn" onclick="sd()">GỬI XÁC NHẬN</button>
     </div>
   </div>
   <script>
-    const API = "https://script.google.com/macros/s/AKfycbwWecNA33YpjZRxyXGZNqyHrHV0ABwySsUJz5AwUe_k-UZeiG3xbg0s1P2CH5icX-9d/exec";
-    const CID = "banh_quy_bo";
-    // Tự động load mục lục từ Robot khi mở trang
+    const API = "https://script.google.com/macros/s/AKfycbzGjWehqsANNfj8c95Mk8fHGpNYnzsh42eifqpizWr8Y0woIkr_AVfteS6omFxt-Q-H/exec", CID = "banh_quy_bo";
+    function getFP(){ return btoa(navigator.userAgent+screen.width).slice(-30); }
     window.onload = () => {
-      fetch(API, {method:"POST", body:JSON.stringify({action:"get_toc", id:CID})})
+      fetch(API, {method:"POST", body:JSON.stringify({action:"get_toc", id:CID, fp:getFP()})})
       .then(r=>r.json()).then(res=>{
+        const cv = document.getElementById("mc"); const ctx = cv.getContext("2d");
         if(res.stt==="ok"){
-          const d = atob(res.data); const cv = document.getElementById("mc"); const ctx = cv.getContext("2d"); const l = d.split("\n");
+          const d = atob(res.data); const l = d.split("\n");
           cv.width=400; cv.height=l.length*28+40; ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height);
-          ctx.fillStyle="#444"; ctx.font="16px Arial"; l.forEach((t,i)=>ctx.fillText(t,20,40+i*26));
+          ctx.globalAlpha = 0.08; ctx.fillStyle="#000"; for(let i=0;i<cv.height;i+=80) ctx.fillText(getFP().slice(0,8),10,i);
+          ctx.globalAlpha = 1.0; ctx.fillStyle="#333"; ctx.font="16px Arial"; l.forEach((t,i)=>ctx.fillText(t,20,40+i*26));
+        } else {
+          cv.width=400; cv.height=100; ctx.fillStyle="#eee"; ctx.fillRect(0,0,cv.width,cv.height);
+          ctx.fillStyle="#999"; ctx.font="14px Arial"; ctx.fillText("Nội dung đang cập nhật...", 120, 55);
         }
       });
     };
-    function sendBill(){
+    function sd(){
       const n=document.getElementById('nick').value, f=document.getElementById('f').files[0], b=document.getElementById('sbtn');
       if(!n||!f) return alert("Điền đủ thông tin!");
       b.innerText="⌛ Đang gửi..."; b.disabled=true;
       const r=new FileReader(); r.readAsDataURL(f);
       r.onload=() => {
-        fetch(API, {method:"POST", body:JSON.stringify({action:"up_bill", nick:n, course:"Khóa học Bánh Quy Bơ", img:r.result})})
+        fetch(API, {method:"POST", body:JSON.stringify({action:"up_bill", nick:n, course:"Khóa học Bánh Quy Bơ", img:r.result, fp:getFP()})})
         .then(res=>res.json()).then(o=>{ if(o.stt==="ok") alert("✅ Đã gửi bill!"); location.reload(); });
       };
     }
